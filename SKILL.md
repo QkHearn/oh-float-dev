@@ -61,7 +61,36 @@ description: >-
 | `WindowType.TYPE_FLOAT` / 应用自己画整窗 UI | **范围外** | 全局悬浮窗 |
 | 视频小窗但用户要完全自定义窗体、不要 PiP 控制条 | **不要用 PiP**；若要自定义页用闪控窗，不要用子窗冒充 |
 
-拿不准时先问一句场景（画面来源？能否自定义 UI？要不要贴边球？要不要防窥？），不要同时生成三套代码。
+拿不准时先问一句场景（画面来源？哪种样式？能否自定义 UI？要不要贴边球？要不要防窥？），不要同时生成三套代码。
+
+**模板对照（用户说某一种 → 用对应枚举，不要一律默认第一种）**
+
+画中画 `PiPTemplateType`（`controlGroups` 必须同族，否则 401）：
+
+| 用户说法 | 模板 |
+|----------|------|
+| 播放、点播、看视频 | `VIDEO_PLAY` |
+| 通话、语音/视频电话 | `VIDEO_CALL` |
+| 会议、开会 | `VIDEO_MEETING` |
+| 直播 | `VIDEO_LIVE` |
+
+闪控球 `FloatingBallTemplate`：
+
+| 用户说法 | 模板 | 必传 |
+|----------|------|------|
+| 静态、图标+标题、不刷新文案 | `STATIC` | title + icon，禁止 update |
+| 标题+内容 | `NORMAL` | title |
+| 强调、图标+标题+内容 | `EMPHATIC` | title |
+| 只要一行标题 | `SIMPLE` | title |
+
+闪控窗 `FloatViewTemplateType`（系统只这两种窗框；页内容是应用自己的）：
+
+| 用户说法 | 模板 |
+|----------|------|
+| 圆角小窗、方窗、面板 | `ROUNDED_RECTANGLE` |
+| 横条、细条、底部条 | `HORIZONTAL_BAR` |
+
+未说样式时：PiP=`VIDEO_PLAY`，球=`EMPHATIC`，窗=`ROUNDED_RECTANGLE`。控件组细节见对应 `js-apis` 的 Template 节。
 
 **互斥（写程序/查错必须检查）：**
 
@@ -124,7 +153,7 @@ description: >-
 
 ### 5. 写程序模式
 
-给需求后生成 **Stage 模型 ArkTS**，对齐 [examples.md](examples.md)。PiP：API12+ 默认 typeNode 骨架，除非用户页面已有 XComponent。签名对不上再读 `js-apis` 对应节，不要整文件。绑定再读 floatView bind；防窥再读 `guide-*.md`。
+给需求后生成 **Stage 模型 ArkTS**，对齐 [examples.md](examples.md)。**先按「模板对照」选枚举**，再抄骨架（只改 `templateType` / `template` / 球的必传字段 / PiP 的 `controlGroups`）。PiP：API12+ 默认 typeNode 骨架，除非用户页面已有 XComponent。签名对不上再读 `js-apis` 该节。绑定再读 floatView bind；防窥再读 `guide-*.md`。
 
 程序必须包含：
 

@@ -28,6 +28,7 @@ syscap：`SystemCapability.Window.SessionManager`
 
 - `context`：组件内 `getHostContext()` 转为 `UIAbilityContext`
 - `controlGroups` 必须与 `templateType` 同族，最多 3 个；`VIDEO_PLAY` 下 101 与 102 互斥
+- 用户说法 → 模板：播放 `VIDEO_PLAY`；通话 `VIDEO_CALL`；会议 `VIDEO_MEETING`；直播 `VIDEO_LIVE`。未说则 `VIDEO_PLAY`
 - 用 Navigation 管页则必填 `navigationId`，且与 `<Navigation id>` 一致
 - 画面黑但框还在：内容节点问题，不是 start 失败
 

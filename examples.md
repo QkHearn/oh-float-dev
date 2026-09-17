@@ -1,6 +1,8 @@
 # 可抄骨架
 
-生成代码时按需求改文案/页面路径/模板，**不要改调用顺序**。API 名以 [docs/](docs/README.md) 落盘接口文档为准。
+生成代码时按需求改文案/页面路径/**模板**，**不要改调用顺序**。用户说了某一种样式，按 `SKILL.md`「模板对照」改枚举，不要三种能力都用默认第一种。
+
+API 名以 [docs/](docs/README.md) 落盘接口文档为准。
 
 权限要写两到三处（资料：[docs/declare-permissions.md](docs/declare-permissions.md)、[docs/declare-permissions-in-acl.md](docs/declare-permissions-in-acl.md)、[docs/restricted-permissions-float.md](docs/restricted-permissions-float.md)）。
 

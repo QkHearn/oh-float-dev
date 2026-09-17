@@ -23,6 +23,7 @@
 ## 易错约束
 
 - `title` 必填、非空、**≤ 64 字节**（不是 64 字符）
+- 用户说法 → 模板：静态图标 `STATIC`（title+icon，禁止 update）；标题+内容 `NORMAL`；强调带图标 `EMPHATIC`；一行标题 `SIMPLE`。未说则 `EMPHATIC`
 - `STATIC` 必传 `icon`，且禁止 update（1300028）
 - update 不能改 `template`（1300027）
 - 未 bind：点球走 `on('click')`（常用来 `restoreMainWindow`）

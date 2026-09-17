@@ -27,6 +27,8 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 
 `start()` Promise resolve ≠ 启动完成。`getWindowProperties` / 防窥 windowId 须 STARTED 之后。
 
+窗框只有两种：用户说圆角/面板 → `ROUNDED_RECTANGLE`；横条/细条 → `HORIZONTAL_BAR`。未说则圆角。可用 `switchTemplate` 切换。页内容不是系统模板。
+
 ## 绑定（易错，不是接口抄录）
 
 入口只有 `floatView.bind` / `unbind`。两边都 create、都未 start、都未绑定才能 bind。bind 后 `start()` 或 `startFloatingBall()` 会同时建两个窗，先调谁谁先亮。stop 任一即两边都停。窗状态 `IN_FLOATING_BALL=5`。已绑定后点球由系统展开窗，不要当「只还原主窗」。
