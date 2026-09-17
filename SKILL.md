@@ -1,5 +1,5 @@
 ---
-name: oh-float-dev
+name: float-kit
 description: >-
   辅助 OpenHarmony 悬浮类需求开发：画中画（PiPWindow）、闪控窗（floatView）、闪控球（floatingBall）。
   覆盖能力分流、接口指南、代码查错（指出文件/行/错在哪）、按需求生成 ArkTS 程序、按评审稿写需求设计。
