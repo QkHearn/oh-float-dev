@@ -1,8 +1,19 @@
 # 可抄骨架
 
-生成代码时按需求改文案/页面路径/**模板**，**不要改调用顺序**。用户说了某一种样式，按 `SKILL.md`「模板对照」改枚举，不要三种能力都用默认第一种。
+路径：[docs/stage-layout.md](docs/stage-layout.md)。语法：[docs/arkui-syntax.md](docs/arkui-syntax.md)。视觉：[docs/ui-style.md](docs/ui-style.md)。按需求改文案/页面路径/**模板**，**不要改调用顺序**。用户说了某一种样式，按 `SKILL.md`「模板对照」改枚举。
 
-API 名以 [docs/](docs/README.md) 落盘接口文档为准。
+API 名以 [docs/](docs/README.md) 落盘接口文档为准。签名对不上再 Grep 对应 `js-apis-*.md` 该节。
+
+**必须包含**（抄骨架前核对）：
+
+1. 能力探测：syscap + `isXxxEnabled`
+2. 权限三处：下方 `module.json5` + ACL；仅 `FLOAT_VIEW` 弹窗。PiP 无特殊权限。`USE_FLOAT_BALL` / `DLP_GET_HIDE_STATUS` 不弹窗
+3. 调用顺序与 `BusinessError` 与本节骨架一致
+4. 状态回调：PiP `on('stateChange')`；窗 `onStateChange`；球 `on('stateChange'|'click')`
+5. 退出：`stop*` + `off*`
+6. PiP API12+ 默认 typeNode 骨架；页面已有 XComponent 用「页面已有 XComponent」节
+7. 球↔窗：`floatView.bind`，听窗状态 `IN_FLOATING_BALL`；不要自己 start 两套。细节：[reference-float-view.md](reference-float-view.md) 绑定节
+8. 闪控窗防窥：[docs/guide-float-view.md](docs/guide-float-view.md) 组合节 + [docs/guide-dlp-anti-peep.md](docs/guide-dlp-anti-peep.md)。不要编 `FloatViewController` 防窥 API；蒙层 windowId = 闪控窗 `getWindowProperties().windowId`
 
 权限要写两到三处（资料：[docs/declare-permissions.md](docs/declare-permissions.md)、[docs/declare-permissions-in-acl.md](docs/declare-permissions-in-acl.md)、[docs/restricted-permissions-float.md](docs/restricted-permissions-float.md)）。
 
@@ -106,7 +117,31 @@ struct PipTypeNodePage {
   }
 
   build() {
-    Button('start PiP').onClick(() => { this.start(); })
+    Column() {
+      Text('画中画')
+        .fontSize(20)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+        .width('100%')
+      Text('退出后以系统小窗继续播放')
+        .fontSize(14)
+        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+        .margin({ top: 8 })
+        .width('100%')
+      Blank()
+      Button('启动')
+        .type(ButtonType.Capsule)
+        .height(40)
+        .width('100%')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .backgroundColor($r('sys.color.ohos_id_color_emphasize'))
+        .onClick(() => { this.start(); })
+    }
+    .width('100%')
+    .height('100%')
+    .padding({ left: 16, right: 16, top: 24, bottom: 24 })
+    .backgroundColor($r('sys.color.ohos_id_color_background'))
   }
 }
 ```
@@ -194,10 +229,33 @@ struct PipPage {
     Navigation() {
       Column() {
         XComponent({ id: 'video', type: XComponentType.SURFACE, controller: this.xCtrl })
-          .width('100%').height(200)
-        Button('start PiP').onClick(() => { this.start(); })
-        Button('stop PiP').onClick(() => { this.pip?.stopPiP(); })
+          .width('100%')
+          .height(200)
+          .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
+          .clip(true)
+        Button('启动')
+          .type(ButtonType.Capsule)
+          .height(40)
+          .width('100%')
+          .fontSize(16)
+          .fontColor(Color.White)
+          .backgroundColor($r('sys.color.ohos_id_color_emphasize'))
+          .margin({ top: 12 })
+          .onClick(() => { this.start(); })
+        Button('停止')
+          .type(ButtonType.Capsule)
+          .height(40)
+          .width('100%')
+          .fontSize(16)
+          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .backgroundColor($r('sys.color.ohos_id_color_component_normal'))
+          .margin({ top: 8 })
+          .onClick(() => { this.pip?.stopPiP(); })
       }
+      .width('100%')
+      .height('100%')
+      .padding(16)
+      .backgroundColor($r('sys.color.ohos_id_color_background'))
     }.id('nav_pip')
   }
 }
@@ -253,12 +311,60 @@ struct FloatViewPage {
   }
 
   build() {
-    Button('start float view').onClick(() => { this.start(); })
+    Column() {
+      Text('闪控窗')
+        .fontSize(20)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+        .width('100%')
+      Text('退后台后继续显示应用页面')
+        .fontSize(14)
+        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+        .margin({ top: 8 })
+        .width('100%')
+      Blank()
+      Button('启动')
+        .type(ButtonType.Capsule)
+        .height(40)
+        .width('100%')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .backgroundColor($r('sys.color.ohos_id_color_emphasize'))
+        .onClick(() => { this.start(); })
+    }
+    .width('100%')
+    .height('100%')
+    .padding({ left: 16, right: 16, top: 24, bottom: 24 })
+    .backgroundColor($r('sys.color.ohos_id_color_background'))
   }
 }
 ```
 
-`pages/FloatPanel` 里的可点控件避开 `getWindowProperties().avoidArea`。
+`pages/FloatPanel`（须写入 `main_pages.json`）。可点控件避开 `getWindowProperties().avoidArea`。视觉见 [docs/ui-style.md](docs/ui-style.md)。
+
+```ts
+@Entry
+@Component
+struct FloatPanel {
+  build() {
+    Column() {
+      Text('盯盘')
+        .fontSize(16)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+      Text('沪指 +0.8%')
+        .fontSize(14)
+        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+        .margin({ top: 4 })
+    }
+    .width('100%')
+    .height('100%')
+    .padding(12)
+    .justifyContent(FlexAlign.Center)
+    .backgroundColor($r('sys.color.ohos_id_color_background'))
+  }
+}
+```
 
 ---
 
@@ -303,6 +409,34 @@ struct BallPage {
   private async refresh(text: string): Promise<void> {
     // template 必须与 start 相同；STATIC 不要走这里
     await this.fb?.updateFloatingBall({ template: this.tpl, title: '盯盘', content: text });
+  }
+
+  build() {
+    Column() {
+      Text('闪控球')
+        .fontSize(20)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+        .width('100%')
+      Text('系统绘制贴边球，这里只负责启动')
+        .fontSize(14)
+        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+        .margin({ top: 8 })
+        .width('100%')
+      Blank()
+      Button('启动')
+        .type(ButtonType.Capsule)
+        .height(40)
+        .width('100%')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .backgroundColor($r('sys.color.ohos_id_color_emphasize'))
+        .onClick(() => { this.start(); })
+    }
+    .width('100%')
+    .height('100%')
+    .padding({ left: 16, right: 16, top: 24, bottom: 24 })
+    .backgroundColor($r('sys.color.ohos_id_color_background'))
   }
 }
 ```

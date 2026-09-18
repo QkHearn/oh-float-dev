@@ -12,7 +12,7 @@ description: >-
 
 只处理三类应用辅助窗口。用户提到子窗 / `TYPE_FLOAT` / 模态窗时：**明确说不在本 Skill 范围**，给一句分流理由后停手，不要硬套这三类 API。
 
-签名、权限、错误码以 [docs/](docs/README.md) **接口落盘**为准。日常不要 WebFetch。用户要求「同步官网」且抓到正文时，才用官网覆盖 `docs/`。`reference-*.md` 只放误用/权限/绑定要点，不列接口表。骨架：[examples.md](examples.md)。指导缺口见 docs/README「缺口」，不要把 `guide-*.md` 当官网全文。
+签名、权限、错误码以 [docs/](docs/README.md) **接口落盘**为准。日常不要 WebFetch。按模式读什么见下表，不要凭本文件直接写页面。`reference-*.md` 只放误用要点。指导缺口见 docs/README「缺口」。
 
 ## 何时用哪种模式
 
@@ -41,7 +41,7 @@ description: >-
 | **分流** | 本文件分流表。拿不准先问一句，不要 Read `docs/` |
 | **接口** | 对应 `js-apis-*.md` 的导入 / create·start / 权限 / 错误码**章节**（Grep 标题后 Read 该段，不要整文件） |
 | **查错** | 对应 `reference-*.md`；对上具体码再读 `errorcode-window-float.md` 该条目 |
-| **写程序** | `examples.md` 对应骨架；签名对不上再读 `js-apis` 该节。绑定读 floatView bind；防窥读 `guide-*.md` |
+| **写程序** | [docs/stage-layout.md](docs/stage-layout.md) + [docs/arkui-syntax.md](docs/arkui-syntax.md) + [docs/ui-style.md](docs/ui-style.md) + `examples.md` 对应骨架；签名对不上再读 `js-apis` 该节。绑定读 floatView bind；防窥读 `guide-*.md` |
 | **需求设计** | [req-template.md](req-template.md)；写接口章时再读 `js-apis` 对应节 |
 
 叠加请求：先分流，再按涉及的模式补读，仍不要通读全部落盘。
@@ -153,19 +153,14 @@ description: >-
 
 ### 5. 写程序模式
 
-给需求后生成 **Stage 模型 ArkTS**，对齐 [examples.md](examples.md)。**先按「模板对照」选枚举**，再抄骨架（只改 `templateType` / `template` / 球的必传字段 / PiP 的 `controlGroups`）。PiP：API12+ 默认 typeNode 骨架，除非用户页面已有 XComponent。签名对不上再读 `js-apis` 该节。绑定再读 floatView bind；防窥再读 `guide-*.md`。
+**读完这 4 个再写。** 不要只凭本文件生成页面。
 
-程序必须包含：
+1. [docs/stage-layout.md](docs/stage-layout.md) — 改哪些路径、如何出补丁
+2. [docs/arkui-syntax.md](docs/arkui-syntax.md) — 页面语法 / 装饰器
+3. [docs/ui-style.md](docs/ui-style.md) — 视觉
+4. [examples.md](examples.md) — 骨架、权限、必须包含的调用
 
-1. 能力探测（syscap + `isXxxEnabled`）
-2. 权限三处都写齐：`module.json5` 声明、签名 Profile 的 ACL、仅 `FLOAT_VIEW` 再 `requestPermissionsFromUser`。PiP 无特殊权限。`USE_FLOAT_BALL` / `DLP_GET_HIDE_STATUS` 为 system_grant，不弹窗。
-3. 正确调用顺序与 `BusinessError` 处理
-4. 状态回调（PiP `on('stateChange')`；闪控窗 `onStateChange`；闪控球 `on('stateChange'|'click')`）
-5. 退出路径：`stop*` + `off*`
-6. 若需求涉及球↔窗切换：用 `floatView.bind`，听窗状态 `IN_FLOATING_BALL`；**不要**自己 start 两套再手动切
-7. 需求写「闪控窗防窥」：按 [docs/guide-float-view.md](docs/guide-float-view.md) 组合节 + [docs/guide-dlp-anti-peep.md](docs/guide-dlp-anti-peep.md) 写 `dlpAntiPeep`。**不要**在 `FloatViewController` 上编防窥 API。蒙层 windowId 必须是闪控窗 `getWindowProperties().windowId`。
-
-默认只给**一个** Ability 页内的完整可编译片段 + 权限 JSON；用户没要工程脚手架就不要铺满多文件工程。
+先按上方「模板对照」选枚举，再抄 examples 对应节（只改模板那一行）。产出：带路径的补丁。绑定 / 防窥 / 签名对不上：按 `examples.md` 文首补读，不在本文件展开。
 
 ### 6. 需求设计模式
 

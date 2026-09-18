@@ -18,6 +18,8 @@
 | 闪控球 | [js-apis-floatingBall.md](js-apis-floatingBall.md) 接口全文 | 无独立 `guide-*.md`。开发步骤以接口文档示例 + `examples.md` 为准 |
 | 闪控窗 | 接口全文 + [guide-float-view.md](guide-float-view.md) | `guide-float-view.md` 是要点摘要，不是官网指导全文。官网：https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/float-view-guide |
 | 防窥 | [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) | 同样是要点摘要。官网：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-dlpantipeep |
+| Stage 工程 / ArkUI 语法 | [stage-layout.md](stage-layout.md)、[arkui-syntax.md](arkui-syntax.md) | 摘要，不是入门全文。装饰器专章不落盘 |
+| 页面视觉 | [ui-style.md](ui-style.md) | 系统分层参数摘要，不是 UX 规范全文 |
 
 用户要求「同步官网」且抓到完整指导正文时，再覆盖或新增 `guide-*.md`。
 
@@ -33,6 +35,9 @@
 | 防窥组合 | [guide-float-view.md](guide-float-view.md) 组合节 + [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) |
 | 错误码 | [errorcode-window-float.md](errorcode-window-float.md) |
 | 权限 | [restricted-permissions-float.md](restricted-permissions-float.md) + [declare-permissions.md](declare-permissions.md) + [declare-permissions-in-acl.md](declare-permissions-in-acl.md) |
+| 写程序·工程 | [stage-layout.md](stage-layout.md) |
+| 写程序·语法 | [arkui-syntax.md](arkui-syntax.md) |
+| 写程序·视觉 | [ui-style.md](ui-style.md) |
 
 ## 落盘 ↔ 官网
 
@@ -48,6 +53,9 @@
 | [restricted-permissions-float.md](restricted-permissions-float.md) | FLOAT_VIEW / USE_FLOAT_BALL / DLP_GET_HIDE_STATUS 等 | 官网受限权限页对应条目 |
 | [declare-permissions.md](declare-permissions.md) | module.json5 声明 | 官网「声明权限」 |
 | [declare-permissions-in-acl.md](declare-permissions-in-acl.md) | ACL | 官网「申请受限权限」 |
+| [stage-layout.md](stage-layout.md) | Stage 单模块工程树与落点 | https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/start-with-ets-stage 、https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-package-structure-stage |
+| [arkui-syntax.md](arkui-syntax.md) | 基本语法 + 装饰器总表 | https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-basic-syntax-overview 、https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-decorator-overview |
+| [ui-style.md](ui-style.md) | 系统默认视觉（分层参数） | OpenHarmony UX 视觉基础/色彩/按钮；实现用 `sys.color` / `sys.float` |
 
 ## 本仓实现对照（选读，非权威）
 
