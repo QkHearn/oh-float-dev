@@ -1,6 +1,8 @@
 # 可抄骨架
 
-路径：[docs/stage-layout.md](docs/stage-layout.md)。语法：[docs/arkui-syntax.md](docs/arkui-syntax.md)。视觉：[docs/ui-style.md](docs/ui-style.md)。按需求改文案/页面路径/**模板**，**不要改调用顺序**。用户说了某一种样式，按 `SKILL.md`「模板对照」改枚举。
+路径：[docs/stage-layout.md](docs/stage-layout.md)。语法：[docs/arkui-syntax.md](docs/arkui-syntax.md)。视觉：[docs/ui-style.md](docs/ui-style.md)。
+
+下面是往 **用户工程现有文件里合并** 的骨架，不是另存一份新 demo 文件。有 `Index.ets` 就改它的 `start`/`build`；闪控窗没有 `FloatPanel.ets` 才新建。按需求改文案/页面路径/**模板**，**不要改调用顺序**。用户说了某一种样式，按 `SKILL.md`「模板对照」改枚举。
 
 API 名以 [docs/](docs/README.md) 落盘接口文档为准。签名对不上再 Grep 对应 `js-apis-*.md` 该节。
 
@@ -60,6 +62,51 @@ async function requestPerms(ctx: common.UIAbilityContext, perms: Permissions[]):
   const atManager = abilityAccessCtrl.createAtManager();
   const grant = await atManager.requestPermissionsFromUser(ctx, perms);
   return grant.authResults.every((v: number) => v === 0);
+}
+```
+
+---
+
+## 合并进现有 Index（先看这段）
+
+下面各节的 `@Entry struct XxxPage` **只作对照**，不要另存为 `PipTypeNodePage.ets` / `FloatViewPage.ets` / `BallPage.ets`。落到用户工程时：
+
+1. 把 import、字段、`start()`、`aboutToDisappear()`、`build()` 里的按钮 **并入现有 `Index`**
+2. 已有 `build()` 就加一个按钮，不要换掉整页 UI
+3. 只有闪控窗内容页不存在时才新建 `FloatPanel.ets`
+
+最小合并（画中画；窗/球同理，只并方法，不换 struct 名）：
+
+```ts
+// 已有 Index.ets：保留原有字段和布局，追加 import / 字段 / startPip / 按钮
+import { PiPWindow, typeNode } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { common } from '@kit.AbilityKit';
+
+@Entry
+@Component
+struct Index {
+  private xCtrl: XComponentController = new XComponentController();
+  private pip?: PiPWindow.PiPController;
+  private node?: typeNode.XComponent;
+
+  private async startPip(): Promise<void> {
+    // 体见下一节 start()，只改模板枚举
+  }
+
+  aboutToDisappear(): void {
+    this.pip?.off('stateChange');
+    this.pip?.off('controlEvent');
+    this.pip?.stopPiP();
+  }
+
+  build() {
+    Column() {
+      Button('进入画中画')
+        .onClick(() => { this.startPip(); })
+    }
+    .width('100%')
+  }
 }
 ```
 

@@ -54,9 +54,14 @@ Project/
 
 ## 产出规则
 
-1. **已有工程**：按上表改现有文件，路径跟用户工程走。不要新建一套工程。
-2. **没有工程**：仍按上表路径给补丁（标 `entry/src/main/...`）。只给页面 `.ets` + `main_pages.json` 增量 + 权限 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。
-3. 产出必须带路径，例如 `entry/src/main/ets/pages/Index.ets`，不要只丢无路径代码块。
+默认 **直接改用户工程里的文件**（读现有内容再补丁进去）。禁止只在对话里讲「请把下面代码拷到 Xxx.ets」。对话里可以简述改了哪几处，代码必须以文件修改落地。
+
+禁止往 `window_window_manager/`、`foundation/`、`interface/` 等框架源码里写应用 ArkTS。本 Skill 只改 **应用工程**。
+
+1. **已有应用工程**：工作区存在 `**/src/main/ets/pages/*.ets`（或用户给出模块路径）。改现有 `Index.ets`、`module.json5`、`main_pages.json` 等。闪控窗内容页不存在时才 **新建** `FloatPanel.ets` 并登记 `main_pages.json`。不要另建 `PipDemo.ets` / `BallPage.ets` 一套平行页面，除非用户点名要新页。
+2. **找不到应用页**：`**/src/main/ets/pages` 不存在（常见：工作区是 OHOS 源码仓、只有 WMS）。**停手问用户应用工程路径**。不要在当前仓根下新建 `entry/`，不要把 demo 写进框架目录。
+3. **用户明确只要脚手架、且已给应用路径**：按上表在该路径 **创建** `entry/src/main/...`。只建页面 `.ets` + `main_pages.json` + 权限相关 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。
+4. 每处修改对应真实路径。不要只丢无路径代码块让用户自己贴。
 
 ## 生命周期（和铁律对齐）
 

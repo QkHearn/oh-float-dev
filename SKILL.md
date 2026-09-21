@@ -2,7 +2,7 @@
 name: float-kit
 description: >-
   辅助 OpenHarmony 悬浮类需求开发：画中画（PiPWindow）、闪控窗（floatView）、闪控球（floatingBall）。
-  覆盖能力分流、接口指南、代码查错（指出文件/行/错在哪）、按需求生成 ArkTS 程序、按评审稿写需求设计。
+  覆盖能力分流、接口指南、代码查错（指出文件/行/错在哪并直接改）、按需求改用户工程里的 ArkTS、按评审稿写需求设计。
   Use when the user mentions 画中画、PiP、PiPWindow、闪控窗、floatView、闪控球、floatingBall、
   悬浮小窗、球窗绑定、防窥保护组合，或要为这三类写代码/查误用/写需求。
   不覆盖子窗口 createSubWindow、全局悬浮窗 TYPE_FLOAT、模态窗 TYPE_DIALOG。
@@ -12,7 +12,7 @@ description: >-
 
 只处理三类应用辅助窗口。用户提到子窗 / `TYPE_FLOAT` / 模态窗时：**明确说不在本 Skill 范围**，给一句分流理由后停手，不要硬套这三类 API。
 
-签名、权限、错误码以 [docs/](docs/README.md) **接口落盘**为准。日常不要 WebFetch。按模式读什么见下表，不要凭本文件直接写页面。`reference-*.md` 只放误用要点。指导缺口见 docs/README「缺口」。
+签名、权限、错误码以 [docs/](docs/README.md) **接口落盘**为准。日常不要 WebFetch。按模式读什么见下表，不要凭本文件直接写页面。写程序 / 查错：有应用工程就改现有文件，不要只告诉用户怎么改。找不到 `pages/` 就问路径。`reference-*.md` 只放误用要点。指导缺口见 docs/README「缺口」。
 
 ## 何时用哪种模式
 
@@ -40,8 +40,8 @@ description: >-
 |------|--------|
 | **分流** | 本文件分流表。拿不准先问一句，不要 Read `docs/` |
 | **接口** | 对应 `js-apis-*.md` 的导入 / create·start / 权限 / 错误码**章节**（Grep 标题后 Read 该段，不要整文件） |
-| **查错** | 对应 `reference-*.md`；对上具体码再读 `errorcode-window-float.md` 该条目 |
-| **写程序** | [docs/stage-layout.md](docs/stage-layout.md) + [docs/arkui-syntax.md](docs/arkui-syntax.md) + [docs/ui-style.md](docs/ui-style.md) + `examples.md` 对应骨架；签名对不上再读 `js-apis` 该节。绑定读 floatView bind；防窥读 `guide-*.md` |
+| **查错** | 对应 `reference-*.md`；路径/权限文件再对 [docs/stage-layout.md](docs/stage-layout.md)；对上具体码再读 `errorcode-window-float.md` 该条目。**能定位到工作区文件就改掉，不要只列 E** |
+| **写程序** | [docs/stage-layout.md](docs/stage-layout.md) + [docs/arkui-syntax.md](docs/arkui-syntax.md) + [docs/ui-style.md](docs/ui-style.md) + `examples.md` 对应骨架。**有工程就改现有文件，不要只在对话里讲怎么改。** 签名对不上再读 `js-apis` 该节。绑定读 floatView bind；防窥读 `guide-*.md` |
 | **需求设计** | [req-template.md](req-template.md)；写接口章时再读 `js-apis` 对应节 |
 
 叠加请求：先分流，再按涉及的模式补读，仍不要通读全部落盘。
@@ -117,17 +117,21 @@ description: >-
 
 先 Grep/Read 该能力 `docs/js-apis-*.md` 的导入、create/start、权限、错误码节，**不要通读全文**。签名以读到的章节为准。reference 只用来核对易错点。
 
-### 4. 查错模式（必须指出错误在哪里）
+### 4. 查错模式（必须指出错误在哪里，能改就改）
 
-对照对应 `reference-*.md` 的「误用清单」逐条扫用户代码。错误码含义对不上时再 Read `docs/errorcode-window-float.md` 对应条目。输出**按出现顺序列表**，每条必须含：
+对照对应 `reference-*.md` 的「误用清单」逐条扫用户代码。也扫 `main_pages.json` / `module.json5` 是否按 [docs/stage-layout.md](docs/stage-layout.md) 落点。错误码含义对不上时再 Read `docs/errorcode-window-float.md` 对应条目。
+
+工作区能定位到 `.ets` / `json5`：**先改文件**（最小替换），对话里用 E 列表说明改了什么。不要只给「请把下面贴回去」。用户只贴了片段、没有文件路径时，才在 E 的改法里给可粘贴补丁。
+
+输出**按出现顺序列表**，每条必须含：
 
 ```markdown
 ### E<n> [<能力>] <一句话问题>
 - **位置**：`文件路径:行号` 或「函数 `foo` 内、第 N 段代码」（用户没给路径就引用原代码片段）
 - **现状**：现在写成了什么
-- **错因**：违反哪条规则（接口/权限/生命周期/互斥/模板）
+- **错因**：违反哪条规则（接口/权限/生命周期/互斥/模板/工程落点）
 - **表现**：对应错误码或日志特征
-- **改法**：给出可粘贴的正确写法（最小补丁，不要整文件重写，除非用户要求）
+- **改法**：已写入 `路径` 的最小改动；仅无文件时才给可粘贴片段
 ```
 
 严重级别：
@@ -148,19 +152,19 @@ description: >-
 - **现状**：`aboutToAppear` 里直接 `this.pip.startPiP()`
 - **错因**：主窗尚未 show
 - **表现**：1300013
-- **改法**：改到主窗已显示后的按钮/`onShown`，并以 `stateChange` 的 STARTED 为准
+- **改法**：已把 `Index.ets` 的 `startPiP` 从 `aboutToAppear` 挪到按钮 `onClick`，并以 `stateChange` 的 STARTED 为准
 ```
 
 ### 5. 写程序模式
 
-**读完这 4 个再写。** 不要只凭本文件生成页面。
+**读完这 4 个再改文件。** 不要只凭本文件生成页面，也不要只在对话里贴说明让用户自己改。
 
-1. [docs/stage-layout.md](docs/stage-layout.md) — 改哪些路径、如何出补丁
+1. [docs/stage-layout.md](docs/stage-layout.md) — 改哪些路径、如何落盘
 2. [docs/arkui-syntax.md](docs/arkui-syntax.md) — 页面语法 / 装饰器
 3. [docs/ui-style.md](docs/ui-style.md) — 视觉
 4. [examples.md](examples.md) — 骨架、权限、必须包含的调用
 
-先按上方「模板对照」选枚举，再抄 examples 对应节（只改模板那一行）。产出：带路径的补丁。绑定 / 防窥 / 签名对不上：按 `examples.md` 文首补读，不在本文件展开。
+先按上方「模板对照」选枚举，再把 examples **合并进现有 Index**（只改模板那一行）。找不到 `**/src/main/ets/pages`：停手问应用工程路径，不要在框架仓建 `entry/`。绑定 / 防窥 / 签名对不上：按 `examples.md` 文首补读，不在本文件展开。
 
 ### 6. 需求设计模式
 

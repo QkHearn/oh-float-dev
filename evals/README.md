@@ -32,7 +32,7 @@
 
 | ID | 任务句 | 硬断言（全过才算通过） |
 |----|--------|------------------------|
-| P1 | 写一个画中画 demo：用户看视频退出后继续以系统小窗播放。 | `PiPWindow`；`VIDEO_PLAY`；create 后 `startPiP`；不在 `aboutToAppear` start；带 ets 路径 |
+| P1 | 写一个画中画 demo：用户看视频退出后继续以系统小窗播放。 | `PiPWindow`；`VIDEO_PLAY`；create 后 `startPiP`；不在 `aboutToAppear` start；改现有 `Index.ets`（有工程时），不要新建 `PipDemo.ets` |
 | P2 | 写一个通话场景的画中画小窗 demo。 | `VIDEO_CALL`；控件组通话族；有 `startPiP` |
 | P3 | 写一个会议场景的画中画 demo。 | `VIDEO_MEETING`；同族 `controlGroups` |
 | P4 | 写一个直播画中画 demo。 | `VIDEO_LIVE`；同族 `controlGroups` |
