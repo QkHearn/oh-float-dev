@@ -52,6 +52,17 @@ struct Index {
 - 对象字面量按接口字段写；不能给未声明属性。
 - `aboutToAppear` 在首次 `build()` 之前，**不是**主窗已 show。start 见 [stage-layout.md](stage-layout.md)。
 
+## 写出来必须能编过（ArkTS）
+
+写程序只抄 [examples/](../examples/README.md)，**不要**把 `docs/js-apis-*.md` 示例当可粘贴代码。
+
+- 会抛的 API 必须 `try/catch`，`const err = e as BusinessError`：`getWindowId`、`requestPermissionsFromUser`、`createAVPlayer`、`getRawFd`、`setVolume`、`off*`
+- `getWindowId()` 是 `number | undefined`，`!== undefined` 再传；禁止 `as number`（运行时 10605999）
+- 应用侧 PiP 只写 `setAutoStartEnabled`，禁止 `setAutoStart`
+- 进 PipHost：`this.getUIContext().getRouter().pushUrl(...)`，不要顶层 deprecated `router.pushUrl`
+- XComponent 用 `XComponent(this.options)`（`XComponentOptions`），不要旧 `{ id, type, controller }`
+- Kit 用 `@kit.*`；防窥 `import { dlpAntiPeep } from '@kit.DeviceSecurityKit'`。工程没有该 DTS 则整段不生成，上屏说明缺 SDK，不要编假 API
+
 ## 通用 UI 装饰器
 
 | 装饰器 | 说明 |

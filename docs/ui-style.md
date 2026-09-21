@@ -34,6 +34,8 @@
 
 一个标题 + 一句说明 + **一个**强调按钮；次操作（停止）用灰底胶囊，不要两个都蓝。
 
+**叠加 demo 的 Index 是能力列表**：强调按钮只留一个主入口（如「进入会议」）；启动/停止球窗、拉起蒙层用灰底次按钮。不要两个都蓝。
+
 ```ts
 Column() {
   Text('画中画')
@@ -71,7 +73,7 @@ Column() {
 .backgroundColor($r('sys.color.ohos_id_color_background'))
 ```
 
-有 `XComponent` 时：画面在上（圆角卡片），按钮条贴底，间距仍 12vp。
+有画面时：布局 `XComponent` 在上，按钮条贴底，间距仍 12vp。不要 `.clip(true)`（会裁掉 surface，一镜到底也没了）。不要先画一页只有按钮的启动页再把画面漏掉。组件写法跟 [pip-xcomponent.md](../examples/pip-xcomponent.md)：`XComponent(this.options)`，高 `800px`。不要旧 `{ id, type, controller }`，不要 `height(200)` 当一镜到底样例。
 
 ## 闪控窗内容页（`pages/FloatPanel`）
 
@@ -101,6 +103,6 @@ Column() {
 
 - 根节点只有一个裸 `Button`，无边距、无背景
 - `fontSize(50)`、随机 `#0D9FFB` / 渐变霓虹
-- 主按钮超过一个；按钮文案英文长句（用「启动」「停止」）
+- 单能力页主按钮超过一个；按钮文案英文长句（用「启动」「停止」）。叠加 Index 见上文
 - 给闪控球 `setUIContext` 或自绘球
 - 给 PiP 小窗套自定义框去「美化」系统控制条

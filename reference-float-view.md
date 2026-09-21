@@ -25,7 +25,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 `isFloatViewEnabled` → `create` → `setUIContext`（path 与 `main_pages.json` 的 src **完全一致**，禁止 `./`）  
 → `onStateChange` → 主窗 **foreground** → `start()` → **回调 STARTED** → `stop`
 
-`start()` Promise resolve ≠ 启动完成。`getWindowProperties` / 防窥 windowId 须 STARTED 之后。
+`start()` Promise resolve ≠ 启动完成。`getWindowProperties` 须 STARTED 之后。防窥不要等 STARTED，也不要用这里的 `windowId`。
 
 窗框只有两种：用户说圆角/面板 → `ROUNDED_RECTANGLE`；横条/细条 → `HORIZONTAL_BAR`。未说则圆角。可用 `switchTemplate` 切换。页内容不是系统模板。
 
@@ -37,7 +37,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 
 ## 防窥组合
 
-`FloatViewController` 没有防窥 API。用 `dlpAntiPeep`。`setAntiPeepMaskLayer` 的 id 必须是闪控窗 `getWindowProperties().windowId`。
+`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉**系统蒙层**：页面 `aboutToAppear` 注册 `antiPeepCB`；`HIDE` 对 `MAIN_WINDOW.getUIContext().getWindowId()` 调 `showSystemMaskLayer`（内部 `setAntiPeepMaskLayer`）。`getWindowId()` 是 `number | undefined`，先判空再传，不要 `as number`（10605999）。不是改页面/球文案。闪控窗页再用 `this.getUIContext().getWindowId()`，不要用 `getWindowProperties().windowId`。系统提醒 ≠ 蒙层。
 
 ## 错误码（应用侧）
 
@@ -59,7 +59,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 
 1. `create` 后没 `start`，或 `start()` then 里当已显示，未等 STARTED
 2. `context` 不是 `UIAbilityContext` → 401
-3. start 前没 `setUIContext`；path 与 `main_pages.json` 不一致或写成 `./pages/Index`
+3. start 前没 `setUIContext`；path 与 `main_pages.json` 不一致或写成 `./pages/Index`；或把启动逻辑写进 FloatPanel
 4. 没写 `module.json5` / 没进 ACL / `FLOAT_VIEW` 没弹窗；对球权限或 DLP 弹窗
 5. 主窗未前台就 start → 1300033
 6. 与 PiP 或未绑定的闪控球同时 start → 1300034
@@ -67,6 +67,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 8. `restoreMainWindow` 在用户未点窗或主窗 PAUSED 时调用 → 1300032
 9. 手势按钮放在 `avoidArea`
 10. 用子窗 / `TYPE_FLOAT` 冒充闪控窗
-11. 重复 `onStateChange` 不 off
+11. 重复 `onStateChange` 不 off；或每次点击都 `create`
 12. 尺寸 ≤ 0 或远超 limits
-13. 编造 `fv.setAntiPeep`，或蒙层用了主窗 id / STARTED 前取 windowId
+13. 编造 `fv.setAntiPeep`；蒙层用 `getLastWindow` / `FloatViewProperties.windowId`；等 STARTED 才注册 `antiPeepCB`；`getWindowId()` 赋给 `number` 或 `as number`（10605999）；把文案改 `****` / `updateFloatingBall` 当防窥
+14. 在 `aboutToDisappear` / `onPageHide` 里 `stop`，退后台被自己停掉

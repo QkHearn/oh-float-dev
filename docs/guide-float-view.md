@@ -19,11 +19,11 @@
 
 1. `canIUse('SystemCapability.Window.SessionManager')` 且 `floatView.isFloatViewEnabled()`
 2. 权限见 [restricted-permissions-float.md](restricted-permissions-float.md) + [declare-permissions.md](declare-permissions.md) + [declare-permissions-in-acl.md](declare-permissions-in-acl.md)：`ohos.permission.FLOAT_VIEW`（user_grant，要 reason/usedScene 和运行时弹窗）；绑定还要 `ohos.permission.USE_FLOAT_BALL`（system_grant，不弹窗）
-3. `floatView.create(config)` 只拿控制器，不建窗
-4. `setUIContext(path)` 或 `setUIContextByName`；path 与 `main_pages.json` 的 src 一致
+3. `floatView.create(config)` 只拿控制器，不建窗。**只 create 一次**，不要每次点启动都 new
+4. `setUIContext(path)` 或 `setUIContextByName`；path 与 `main_pages.json` 的 src 一致。加载的是另一份 `@Entry`（`FloatPanel`），不是 Index
 5. `onStateChange`；主窗前台后 `start()`
 6. **`start()` 的 Promise 返回不表示启动完成**，以回调 `STARTED` 为准（见接口文档）
-7. 退出 `stop` + `offStateChange`
+7. 退后台要继续展示：不要在 `aboutToDisappear` / `onPageHide` 里 `stop`。用户点停止再 `stop` + 销毁时 `offStateChange`
 
 ## 球窗绑定
 
@@ -40,19 +40,19 @@
 
 ## 复杂场景与防窥保护组合使用
 
-闪控窗负责持续展示；防窥保护负责窥视时保护敏感内容。两套能力组合，不要在 `FloatViewController` 上编防窥方法。
+权威：[闪控窗开发指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/float-view-guide)「复杂场景：与防窥保护组合使用」。
 
-防窥接口与示例见 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md)。组合要点：
+闪控窗负责持续展示；防窥是 **DeviceSecurityKit `dlpAntiPeep` 的系统蒙层**，不是改 `FloatPanel` / 闪控球文案。传感器把长期人脸解锁用户标为机主；非机主与机主同时看屏时回调 `HIDE`。**系统防窥提醒可以自己弹，蒙层不会自动加**，必须走官网 `antiPeepCB.onStatusChanged` → `handleAntiPeepStatus(HIDE)` → `setAntiPeepMaskLayer`。用户可手动解除。不要在 `FloatViewController` 上编防窥方法。
 
-1. 声明 `ohos.permission.DLP_GET_HIDE_STATUS`（受限、system_grant、ACL），与闪控窗权限并列
-2. `canIUse('SystemCapability.Security.DlpAntiPeep')`
-3. `isDlpAntiPeepSwitchOn()`；未开则 `requestAntiPeepOptions(context)`（设置 → 隐私与安全 → 防窥保护）
-4. 闪控窗 `STARTED` 之后再 `on('dlpAntiPeep')`
-5. 状态 `HIDE` 时：
-   - 闪控窗页面把敏感字段改为占位（如 `****`），不要只依赖蒙层
-   - `setAntiPeepMaskLayer(windowId)` 的 **windowId 必须是闪控窗** `getWindowProperties().windowId`，不要用 `window.getLastWindow` / 主窗 id（小窗叠在其它应用上时蒙主窗挡不住）
-6. 绑定了闪控球时，同步 `updateFloatingBall` 脱敏 title/content
-7. `PASS` 时恢复展示；页面销毁 / 闪控窗 `STOPPED` 时 `off('dlpAntiPeep')`
-8. 同一窗口不要反复拉蒙层，用标志位
+接口细节见 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md)。组合要点（按官网示例抄）：
 
-错误码见防窥指导；闪控窗 `getWindowProperties` 须已 start，否则 `1300031`。
+1. 声明 `ohos.permission.DLP_GET_HIDE_STATUS`（受限、system_grant、ACL），与 `FLOAT_VIEW` 并列
+2. `canIUse('SystemCapability.Security.DlpAntiPeep')`；用户须在「设置 → 隐私与安全 → 防窥保护」打开本应用
+3. `isDlpAntiPeepSwitchOn()`；未开则提示去打开，不要假装已监听
+4. `EntryAbility` 把主窗写入 `AppStorage.setOrCreate('MAIN_WINDOW', ...)`
+5. 页面 `aboutToAppear`：`getDlpAntiPeepInfo()` 同步一次，再 `listenOnAntiPeepStatus(this.antiPeepCB)`。**不要等闪控窗 STARTED**
+6. `HIDE`：取出 `MAIN_WINDOW` 后 `const windowId: number | undefined = w.getUIContext().getWindowId(); if (windowId !== undefined) { showSystemMaskLayer(windowId); }`。闪控窗页同样先判空再存/再蒙。官网写成 `as number` 会 `10605999`。**不要**用 `getLastWindow` / `FloatViewProperties.windowId`
+7. 不要把页面字段改成 `****`，也不要 `updateFloatingBall` 改 title/content 当防窥
+8. 页面销毁：`off('dlpAntiPeep')`；不要在闪控窗 `STOPPED` 时关掉监听
+
+错误码见防窥指导。

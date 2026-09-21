@@ -14,8 +14,8 @@
 
 | 能力 | 已落盘 | 未落盘 / 非全文 |
 |------|--------|-----------------|
-| 画中画 | [js-apis-pipWindow.md](js-apis-pipWindow.md) 接口全文 | 官网「画中画开发指导」未进本目录。已知页：https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/pipwindow-typenode 、https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pipwindow-xcomponent 、https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-pipwindow 。写程序以接口 + `examples.md` 为准 |
-| 闪控球 | [js-apis-floatingBall.md](js-apis-floatingBall.md) 接口全文 | 无独立 `guide-*.md`。开发步骤以接口文档示例 + `examples.md` 为准 |
+| 画中画 | [js-apis-pipWindow.md](js-apis-pipWindow.md) 接口全文 + [guide-pip.md](guide-pip.md) 步骤摘要 | `guide-pip.md` 不是官网全文。写程序以指导摘要 + [examples/pip.md](../examples/pip.md) 为准，日常不打开官网 |
+| 闪控球 | [js-apis-floatingBall.md](js-apis-floatingBall.md) 接口全文 | 无独立 `guide-*.md`。开发步骤以接口文档 + [examples/floating-ball.md](../examples/floating-ball.md) 为准 |
 | 闪控窗 | 接口全文 + [guide-float-view.md](guide-float-view.md) | `guide-float-view.md` 是要点摘要，不是官网指导全文。官网：https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/float-view-guide |
 | 防窥 | [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) | 同样是要点摘要。官网：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-dlpantipeep |
 | Stage 工程 / ArkUI 语法 | [stage-layout.md](stage-layout.md)、[arkui-syntax.md](arkui-syntax.md) | 摘要，不是入门全文。装饰器专章不落盘 |
@@ -28,7 +28,7 @@
 | 能力 | 读这些 |
 |------|--------|
 | 选型 | [window-type-overview.md](window-type-overview.md) |
-| 画中画 | [js-apis-pipWindow.md](js-apis-pipWindow.md) + [../reference-pip.md](../reference-pip.md) |
+| 画中画 | [js-apis-pipWindow.md](js-apis-pipWindow.md) + [guide-pip.md](guide-pip.md) + [../reference-pip.md](../reference-pip.md) |
 | 闪控窗 | [js-apis-floatView.md](js-apis-floatView.md) + [guide-float-view.md](guide-float-view.md) + [../reference-float-view.md](../reference-float-view.md) |
 | 闪控球 | [js-apis-floatingBall.md](js-apis-floatingBall.md) + [../reference-floating-ball.md](../reference-floating-ball.md) |
 | 绑定 | 闪控窗接口 bind/unbind + 指导「球窗绑定」 |
@@ -38,6 +38,7 @@
 | 写程序·工程 | [stage-layout.md](stage-layout.md) |
 | 写程序·语法 | [arkui-syntax.md](arkui-syntax.md) |
 | 写程序·视觉 | [ui-style.md](ui-style.md) |
+| 写程序·骨架 | [../examples/README.md](../examples/README.md) |
 
 ## 落盘 ↔ 官网
 
@@ -47,6 +48,7 @@
 | [js-apis-floatView.md](js-apis-floatView.md) | 闪控窗接口（含 bind/unbind） | https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-floatview |
 | [js-apis-floatingBall.md](js-apis-floatingBall.md) | 闪控球接口 | https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-floatingball |
 | [window-type-overview.md](window-type-overview.md) | 窗口类型 / 球窗对比 | https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-type-overview |
+| [guide-pip.md](guide-pip.md) | 画中画开发步骤（页面 XComponent 一镜到底 / typeNode 附录） | https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-pipwindow |
 | [guide-float-view.md](guide-float-view.md) | 闪控窗开发指导（含球窗绑定、与防窥组合） | https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/float-view-guide |
 | [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) | 防窥保护开发指导 | https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-dlpantipeep |
 | [errorcode-window-float.md](errorcode-window-float.md) | 窗口错误码 13000xx | 官网窗口错误码页对应章节 |

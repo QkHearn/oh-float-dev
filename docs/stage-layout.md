@@ -14,12 +14,21 @@ Project/
 │   ├── src/main/
 │   │   ├── ets/
 │   │   │   ├── entryability/EntryAbility.ets
-│   │   │   └── pages/
-│   │   │       ├── Index.ets              # 默认把 PiP / 球 / 启动闪控窗写这里
-│   │   │       └── FloatPanel.ets         # 仅闪控窗：setUIContext 加载的页
-│   │   ├── resources/base/
-│   │   │   ├── profile/main_pages.json    # 页面路径表
-│   │   │   └── element/string.json        # FLOAT_VIEW 的 reason
+│   │   │   ├── pages/
+│   │   │   │   ├── Index.ets              # 入口；画中画可当宿主，或只做列表
+│   │   │   │   ├── PipHost.ets            # 画中画宿主 @Entry（Index 已是列表才建）
+│   │   │   │   └── FloatPanel.ets         # 仅闪控窗：setUIContext 加载的页（另一份 @Entry，不是 Index）
+│   │   │   ├── xcomponent/Page1.ets       # 画中画视频页：根节点 NavDestination
+│   │   │   ├── navigation/Page1.ets       # 仅 typeNode：根节点 NavDestination
+│   │   │   ├── util/PipManager.ets        # 官方 typeNode 单例
+│   │   │   ├── util/XCNodeController.ets
+│   │   │   ├── model/AVPlayer.ets         # 画中画播放器（play/pause/静音）
+│   │   │   └── float/PeepGuard.ets        # 仅闪控窗+防窥
+│   │   ├── resources/
+│   │   │   ├── rawfile/test.mp4           # 画中画片源；没有则黑屏
+│   │   │   └── base/
+│   │   │       ├── profile/main_pages.json
+│   │   │       └── element/string.json    # FLOAT_VIEW 的 reason
 │   │   └── module.json5                   # requestPermissions
 │   └── build-profile.json5                # 不要编造；用户没要脚手架就别生成
 └── build-profile.json5
@@ -31,13 +40,19 @@ Project/
 
 | 路径 | 职责 | 写悬浮窗时 |
 |------|------|------------|
-| `ets/pages/Index.ets` | `@Entry` 页面 | PiP / 闪控球 / 点按钮 start 闪控窗 |
+| `ets/pages/Index.ets` | `@Entry` 页面 | 球 / 启动闪控窗；画中画可当宿主。已是入口列表则只 `getRouter().pushUrl` 到 `PipHost` |
+| `ets/pages/PipHost.ets` | 画中画宿主 `@Entry` | Index 已是列表才建，必须进 `main_pages.json` |
+| `ets/model/AVPlayer.ets` | 画中画播放器 | 不要把 AVPlayer 写进页面；须有 `play` / `pause` / `setMuted` |
+| `ets/xcomponent/Page1.ets` | XComponent 视频页 | 一镜到底；根节点 `NavDestination()`；不是 `@Entry` |
+| `ets/navigation/Page1.ets` | typeNode 视频页 | 迁节点才建；根节点 `NavDestination()` |
+| `ets/float/PeepGuard.ets` | 闪控窗防窥 | 含 `showSystemMaskLayer`、`antiPeepCB`；`aboutToAppear` 就监听 |
+| `resources/rawfile/test.mp4` | 画中画示例片源 | 默认骨架读这个 rawfile；没有则播放器失败、小窗黑 |
 | `ets/pages/FloatPanel.ets` | 闪控窗内容页 | `setUIContext('pages/FloatPanel')` 的目标；也要 `@Entry` |
 | `resources/base/profile/main_pages.json` | 页面注册 | 路径须与 `setUIContext` / `loadContent` 的字符串一致，禁止相对路径 |
 | `module.json5` | 模块配置 + 权限 | `requestPermissions`；详见 [declare-permissions.md](declare-permissions.md) |
 | `resources/*/element/string.json` | 字符串 | `FLOAT_VIEW` 的 `reason` |
 | 签名 Profile | ACL | 调试签名；详见 [declare-permissions-in-acl.md](declare-permissions-in-acl.md) |
-| `ets/entryability/EntryAbility.ets` | Ability | `onWindowStageCreate` → `windowStage.loadContent('pages/Index')`。主窗 show 在这之后，不在页面 `aboutToAppear` |
+| `ets/entryability/EntryAbility.ets` | Ability | `onWindowStageCreate` → `windowStage.loadContent('pages/Index')`。主窗 show 在这之后，不在页面 `aboutToAppear`。防窥：`loadContent` 成功后把主窗写入 `AppStorage` 的 `MAIN_WINDOW` |
 
 `main_pages.json` 示例：
 
@@ -58,10 +73,13 @@ Project/
 
 禁止往 `window_window_manager/`、`foundation/`、`interface/` 等框架源码里写应用 ArkTS。本 Skill 只改 **应用工程**。
 
-1. **已有应用工程**：工作区存在 `**/src/main/ets/pages/*.ets`（或用户给出模块路径）。改现有 `Index.ets`、`module.json5`、`main_pages.json` 等。闪控窗内容页不存在时才 **新建** `FloatPanel.ets` 并登记 `main_pages.json`。不要另建 `PipDemo.ets` / `BallPage.ets` 一套平行页面，除非用户点名要新页。
-2. **找不到应用页**：`**/src/main/ets/pages` 不存在（常见：工作区是 OHOS 源码仓、只有 WMS）。**停手问用户应用工程路径**。不要在当前仓根下新建 `entry/`，不要把 demo 写进框架目录。
-3. **用户明确只要脚手架、且已给应用路径**：按上表在该路径 **创建** `entry/src/main/...`。只建页面 `.ets` + `main_pages.json` + 权限相关 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。
-4. 每处修改对应真实路径。不要只丢无路径代码块让用户自己贴。
+1. **已有应用工程且 `ets/pages/*.ets` 在**：按 [examples/merge.md](../examples/merge.md) 改现有文件。画中画按 [examples/pip.md](../examples/pip.md) 建可加载宿主 + `Page1`。闪控窗没有内容页才 **新建** `FloatPanel.ets` 并登记。闪控球不要新建球页。
+2. **用户给了应用路径，且已有 `module.json5` + `main_pages.json`，但 `ets/pages` 为空**：按骨架**补文件**，不要问路径。
+3. **找不到应用模块**：没有 `module.json5`（常见：工作区是 OHOS 源码仓、只有 WMS）。**停手问用户应用工程路径**。不要在当前仓根下新建 `entry/`，不要把 demo 写进框架目录。
+4. **用户明确只要脚手架、且已给应用路径**：按上表在该路径 **创建** `entry/src/main/...`。只建页面 `.ets` + `main_pages.json` + 权限相关 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。
+5. 每处修改对应真实路径。不要只丢无路径代码块让用户自己贴。
+
+写完后必须 `CompileArkTS` 通过才算写完。命令行打 HAP：`PackageHap` 报 `Unable to locate a Java Runtime` 时设 `JAVA_HOME` 为 DevEco 自带 JBR（`.../Contents/jbr/Contents/Home`），**不改业务 ets**。
 
 ## 生命周期（和铁律对齐）
 

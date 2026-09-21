@@ -26,7 +26,7 @@
 - 用户说法 → 模板：静态图标 `STATIC`（title+icon，禁止 update）；标题+内容 `NORMAL`；强调带图标 `EMPHATIC`；一行标题 `SIMPLE`。未说则 `EMPHATIC`
 - `STATIC` 必传 `icon`，且禁止 update（1300028）
 - update 不能改 `template`（1300027）
-- 未 bind：点球走 `on('click')`（常用来 `restoreMainWindow`）
+- 未 bind：点球走 `on('click')`，`restoreMainWindow(want)` 必传 `Want`（bundleName + abilityName），不要空参
 - 已 bind：点球由系统展开窗
 
 ## 错误码（应用侧）
@@ -56,4 +56,5 @@
 9. 没听 `click`；或已 bind 后还把 click 当「只还原主窗」
 10. `restoreMainWindow` 在用户未点击或主窗 PAUSED 时调用
 11. 把闪控球当 PiP 或自定义画布
-12. 连点 start 多个球 → 1300021 / 1300022
+12. 连点 start 多个球 → 1300021 / 1300022；或每次点击都 `create`
+13. 在 `aboutToDisappear` 里 `stopFloatingBall`
