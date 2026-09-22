@@ -45,4 +45,4 @@ async function bindAndStart(ctx: common.UIAbilityContext): Promise<void> {
 
 `create` 一次。听 `STARTED` / `IN_FLOATING_BALL`。`stop` 任一即两边一起停。不要在 `aboutToDisappear` 里 `stop`。`offStateChange` 要 try/catch。
 
-禁止：先 `startFloatingBall` 再 `bind`；自己 start 两套手动切。若还要防窥：读 [peep.md](peep.md)；Index `aboutToAppear` 就注册 `antiPeepCB`；`HIDE` 取 `MAIN_WINDOW.getUIContext().getWindowId()`，`!== undefined` 再 `showSystemMaskLayer`。
+禁止：先 `startFloatingBall` 再 `bind`；自己 start 两套手动切。若还要防窥：读 [peep.md](peep.md)。

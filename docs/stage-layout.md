@@ -79,7 +79,16 @@ Project/
 4. **用户明确只要脚手架、且已给应用路径**：按上表在该路径 **创建** `entry/src/main/...`。只建页面 `.ets` + `main_pages.json` + 权限相关 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。
 5. 每处修改对应真实路径。不要只丢无路径代码块让用户自己贴。
 
-写完后必须 `CompileArkTS` 通过才算写完。命令行打 HAP：`PackageHap` 报 `Unable to locate a Java Runtime` 时设 `JAVA_HOME` 为 DevEco 自带 JBR（`.../Contents/jbr/Contents/Home`），**不改业务 ets**。
+写完后**自己**在应用工程根打 HAP，编不过不算写完。交卷必须带 `CompileArkTS` 通过；不要让用户去 DevEco 点编译来验你刚写的代码。找不到 `module.json5` 或 `hvigorw`：写明停手原因，不要假装编过。
+
+```text
+export PATH="<DevEco>/Contents/tools/node/bin:<DevEco>/Contents/tools/ohpm/bin:<DevEco>/Contents/tools/hvigor/bin:$PATH"
+export DEVECO_SDK_HOME="<DevEco>/Contents/sdk"
+export JAVA_HOME="<DevEco>/Contents/jbr/Contents/Home"
+cd <应用工程根> && hvigorw assembleHap -p product=default --no-daemon
+```
+
+macOS DevEco 常见根目录：`/Applications/DevEco-Studio.app`。`PackageHap` 报 `Unable to locate a Java Runtime` 时只改 `JAVA_HOME`，**不改业务 ets**。`CompileArkTS` 报错改刚写的 ets 再编。
 
 ## 生命周期（和铁律对齐）
 

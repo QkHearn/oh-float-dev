@@ -12,7 +12,8 @@
 - 权限：`ohos.permission.DLP_GET_HIDE_STATUS`（见 [restricted-permissions-float.md](restricted-permissions-float.md)）
   - 级别 system_basic，授权方式 system_grant（声明 + ACL，不弹窗）
   - 支持设备：Phone；API20 起对普通应用开放
-- 用户须在「设置 > 隐私与安全 > 防窥保护」打开本应用
+- 用户须在「设置 > 隐私与安全 > 防窥保护」打开本应用。声明 `DLP_GET_HIDE_STATUS` **不会**自动打开该开关
+- 未开：页面 hint + `requestAntiPeepOptions(context)`；不要静默跳过
 
 ## 接口
 
@@ -38,7 +39,7 @@
 
 ```text
 canIUse → isDlpAntiPeepSwitchOn
-  → 未开：提示去设置打开防窥保护
+  → 未开：页面 hint「设置 → 隐私与安全 → 防窥保护」+ requestAntiPeepOptions
   → getDlpAntiPeepInfo 同步一次
   → listenOnAntiPeepStatus(antiPeepCB)
   → HIDE：MAIN_WINDOW.getUIContext().getWindowId()（先判空，不要 as number）→ showSystemMaskLayer

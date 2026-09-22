@@ -37,7 +37,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 
 ## 防窥组合
 
-`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉**系统蒙层**：页面 `aboutToAppear` 注册 `antiPeepCB`；`HIDE` 对 `MAIN_WINDOW.getUIContext().getWindowId()` 调 `showSystemMaskLayer`（内部 `setAntiPeepMaskLayer`）。`getWindowId()` 是 `number | undefined`，先判空再传，不要 `as number`（10605999）。不是改页面/球文案。闪控窗页再用 `this.getUIContext().getWindowId()`，不要用 `getWindowProperties().windowId`。系统提醒 ≠ 蒙层。
+`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉系统蒙层，开关和抄写见 [examples/peep.md](examples/peep.md)。`getWindowId()` 先判空，不要 `as number`。不要用 `getWindowProperties().windowId`，不要改文案当防窥。系统提醒 ≠ 蒙层。
 
 ## 错误码（应用侧）
 
@@ -69,5 +69,5 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 10. 用子窗 / `TYPE_FLOAT` 冒充闪控窗
 11. 重复 `onStateChange` 不 off；或每次点击都 `create`
 12. 尺寸 ≤ 0 或远超 limits
-13. 编造 `fv.setAntiPeep`；蒙层用 `getLastWindow` / `FloatViewProperties.windowId`；等 STARTED 才注册 `antiPeepCB`；`getWindowId()` 赋给 `number` 或 `as number`（10605999）；把文案改 `****` / `updateFloatingBall` 当防窥
+13. 编造 `fv.setAntiPeep`；蒙层用 `getLastWindow` / `FloatViewProperties.windowId`；等 STARTED 才注册 `antiPeepCB`；`getWindowId()` 赋给 `number` 或 `as number`（10605999）；把文案改 `****` / `updateFloatingBall` 当防窥；开关未开静默跳过（须上屏 + `requestAntiPeepOptions`）
 14. 在 `aboutToDisappear` / `onPageHide` 里 `stop`，退后台被自己停掉

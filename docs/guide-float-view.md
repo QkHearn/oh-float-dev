@@ -47,12 +47,11 @@
 接口细节见 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md)。组合要点（按官网示例抄）：
 
 1. 声明 `ohos.permission.DLP_GET_HIDE_STATUS`（受限、system_grant、ACL），与 `FLOAT_VIEW` 并列
-2. `canIUse('SystemCapability.Security.DlpAntiPeep')`；用户须在「设置 → 隐私与安全 → 防窥保护」打开本应用
-3. `isDlpAntiPeepSwitchOn()`；未开则提示去打开，不要假装已监听
-4. `EntryAbility` 把主窗写入 `AppStorage.setOrCreate('MAIN_WINDOW', ...)`
-5. 页面 `aboutToAppear`：`getDlpAntiPeepInfo()` 同步一次，再 `listenOnAntiPeepStatus(this.antiPeepCB)`。**不要等闪控窗 STARTED**
-6. `HIDE`：取出 `MAIN_WINDOW` 后 `const windowId: number | undefined = w.getUIContext().getWindowId(); if (windowId !== undefined) { showSystemMaskLayer(windowId); }`。闪控窗页同样先判空再存/再蒙。官网写成 `as number` 会 `10605999`。**不要**用 `getLastWindow` / `FloatViewProperties.windowId`
-7. 不要把页面字段改成 `****`，也不要 `updateFloatingBall` 改 title/content 当防窥
-8. 页面销毁：`off('dlpAntiPeep')`；不要在闪控窗 `STOPPED` 时关掉监听
+2. 开关未开：按 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) + [examples/peep.md](../examples/peep.md)，不要静默跳过
+3. `EntryAbility` 把主窗写入 `AppStorage.setOrCreate('MAIN_WINDOW', ...)`
+4. 页面 `aboutToAppear`：`getDlpAntiPeepInfo()` 同步一次，再 `listenOnAntiPeepStatus(this.antiPeepCB)`。**不要等闪控窗 STARTED**
+5. `HIDE`：取出 `MAIN_WINDOW` 后 `const windowId: number | undefined = w.getUIContext().getWindowId(); if (windowId !== undefined) { showSystemMaskLayer(windowId); }`。闪控窗页同样先判空再存/再蒙。官网写成 `as number` 会 `10605999`。**不要**用 `getLastWindow` / `FloatViewProperties.windowId`
+6. 不要把页面字段改成 `****`，也不要 `updateFloatingBall` 改 title/content 当防窥
+7. 页面销毁：`off('dlpAntiPeep')`；不要在闪控窗 `STOPPED` 时关掉监听
 
 错误码见防窥指导。

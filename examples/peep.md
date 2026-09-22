@@ -6,6 +6,8 @@
 
 一人看屏是 `PASS`，**不会出蒙层**。须有非机主同时看屏，或 demo 页「拉起蒙层」主动调同一套 windowId。失败码要上屏：`201` 多半是签名 ACL 没加 `DLP_GET_HIDE_STATUS`。
 
+开关（ACL ≠ 防窥保护）见 [guide-dlp-anti-peep.md](../docs/guide-dlp-anti-peep.md)；下面抄代码，不要静默 `return`。
+
 落点：
 
 1. `EntryAbility` `loadContent` 成功后 `AppStorage.setOrCreate('MAIN_WINDOW', windowStage.getMainWindowSync())`
@@ -18,6 +20,7 @@
 ```ts
 import { dlpAntiPeep } from '@kit.DeviceSecurityKit';
 import { window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 
 export interface AntiPeepCallback {
@@ -121,11 +124,21 @@ export function offAntiPeepStatus(): void {
     console.error(`off ${err.code} ${err.message}`);
   }
 }
+
+export async function askOpenAntiPeep(ctx: common.UIAbilityContext): Promise<void> {
+  try {
+    await dlpAntiPeep.requestAntiPeepOptions(ctx);
+  } catch (e) {
+    const err = e as BusinessError;
+    console.error(`requestAntiPeepOptions ${err.code} ${err.message}`);
+  }
+}
 ```
 
-页面侧按官网声明回调，不要等 `STARTED` 再 attach：
+页面侧按官网声明回调，不要等 `STARTED` 再 attach。`hint` 必须进 `build()`，不要只写在注释里：
 
 ```ts
+@State hint: string = '';
 antiPeepCB: AntiPeepCallback = {
   onStatusChanged: (status: dlpAntiPeep.DlpAntiPeepStatus): Promise<void> => {
     return handleAntiPeepStatus(status);
@@ -136,13 +149,21 @@ aboutToAppear(): void {
   this.initAntiPeepStatus();
 }
 
+aboutToDisappear(): void {
+  offAntiPeepStatus();
+}
+
 private initAntiPeepStatus(): void {
   if (!canUseAntiPeep()) {
+    this.hint = '当前设备不支持防窥';
     return;
   }
   isAntiPeepOn().then((opened: boolean) => {
     if (!opened) {
-      return; // 提示去「设置 → 隐私与安全 → 防窥保护」打开本应用；可选 requestAntiPeepOptions，非必调
+      this.hint = '请到设置 → 隐私与安全 → 防窥保护 打开本应用';
+      const ctx = this.getUIContext().getHostContext() as common.UIAbilityContext;
+      askOpenAntiPeep(ctx);
+      return;
     }
     const info = getAntiPeepInfo();
     if (info !== undefined) {
@@ -151,9 +172,20 @@ private initAntiPeepStatus(): void {
     listenOnAntiPeepStatus(this.antiPeepCB);
   });
 }
+
+build() {
+  Column() {
+    if (this.hint.length > 0) {
+      Text(this.hint)
+        .fontSize(14)
+        .fontColor($r('sys.color.ohos_id_color_warning'))
+        .width('100%')
+    }
+  }
+}
 ```
 
-禁止：`fv.setAntiPeep(...)`；`setAntiPeepMaskLayer` 用 `getLastWindow` / `FloatViewProperties.windowId`；等 `STARTED` 才 `on('dlpAntiPeep')`；`getWindowId()` 直接赋给 `number` 或 `as number`（10605999）；页面/球文案改 `****` 当防窥。
+禁止：`fv.setAntiPeep(...)`；`setAntiPeepMaskLayer` 用 `getLastWindow` / `FloatViewProperties.windowId`；等 `STARTED` 才 `on('dlpAntiPeep')`；`getWindowId()` 直接赋给 `number` 或 `as number`（10605999）；页面/球文案改 `****` 当防窥；开关未开静默 `return`。
 
 `FloatPanel` 存 id、以及手动「拉起蒙层」，同样先判空：
 
@@ -170,7 +202,14 @@ private pullMask(): void {
   if (mainWin === undefined) {
     return;
   }
-  const windowId: number | undefined = mainWin.getUIContext().getWindowId();
+  let windowId: number | undefined = undefined;
+  try {
+    windowId = mainWin.getUIContext().getWindowId();
+  } catch (e) {
+    const err = e as BusinessError;
+    console.error(`getWindowId ${err.code} ${err.message}`);
+    return;
+  }
   if (windowId === undefined) {
     return;
   }

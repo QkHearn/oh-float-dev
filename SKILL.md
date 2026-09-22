@@ -33,6 +33,7 @@ description: >-
 - [ ] 1. 判定能力：pip | float_view | floating_ball | bind | float_view+peep | pip+bind | pip+bind+peep | out_of_scope
 - [ ] 2. 按模式读文件（见下表），不要把 docs/ 整目录读完
 - [ ] 3. 按模式产出；写程序只抄 examples/，不要抄 js-apis 示例
+- [ ] 4. 改了 ets / json5：自己跑 hvigorw；交卷必须带 CompileArkTS 通过。无工程 / 无 hvigorw 则写明停手原因，禁止让用户去 DevEco 代编
 ```
 
 | 模式 | 读什么 |
@@ -40,7 +41,7 @@ description: >-
 | **分流** | 本文件分流表。拿不准先问一句，不要 Read `docs/` |
 | **接口** | 对应 `js-apis-*.md` 的导入 / create·start / 权限 / 错误码**章节**（Grep 标题后 Read 该段） |
 | **查错** | 对应 `reference-*.md`；路径/权限再对 [docs/stage-layout.md](docs/stage-layout.md)；对上具体码再读 `errorcode-window-float.md` 该条目。**能定位到工作区文件就改掉** |
-| **写程序** | [examples/README.md](examples/README.md) + `merge.md` + 表里列出的骨架，再对照 [docs/stage-layout.md](docs/stage-layout.md) / [docs/arkui-syntax.md](docs/arkui-syntax.md) / [docs/ui-style.md](docs/ui-style.md)。签名对不上再读 `js-apis` 该节 |
+| **写程序** | [examples/README.md](examples/README.md) + `merge.md` + 表里列出的骨架，再对照 [docs/stage-layout.md](docs/stage-layout.md) / [docs/arkui-syntax.md](docs/arkui-syntax.md) / [docs/ui-style.md](docs/ui-style.md)。禁止通读 `js-apis-*.md`；签名对不上才 Grep 该节 |
 | **需求设计** | [req-template.md](req-template.md)；写接口章时再读 `js-apis` 对应节 |
 
 ### 1. 分流（必做）
@@ -111,11 +112,10 @@ description: >-
 1. [examples/README.md](examples/README.md) 选路径；`merge.md` + 表里骨架。画中画默认 [examples/pip-xcomponent.md](examples/pip-xcomponent.md)；绑定+防窥读 `bind.md` + `peep.md`；叠加读 merge 叠加节。
 2. [docs/stage-layout.md](docs/stage-layout.md) 落点。有 `module.json5` + `main_pages.json`、用户给了路径、即使 `ets/pages` 为空也补文件。仅 OHOS 框架仓、没有应用模块才停手问路径。
 3. [docs/arkui-syntax.md](docs/arkui-syntax.md)「写出来必须能编过」+ [docs/ui-style.md](docs/ui-style.md)
-
-改完必须 `CompileArkTS` 通过才算写完：
+4. **自己编译**：命令见 [docs/stage-layout.md](docs/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `js-apis` **某一节**，禁止把 `js-apis-*.md` 当骨架通读
+5. **防窥开关**：见 [examples/peep.md](examples/peep.md)
 
 - ArkTS error / throw / deprecated / `as number` → 改刚写的 ets
-- `PackageHap` `Unable to locate a Java Runtime` → `JAVA_HOME` 指 DevEco JBR，不改页面
 - 缺 `DeviceSecurityKit` DTS → 说明 SDK，不要改成文案防窥
 
 ### 6. 需求设计模式
@@ -124,7 +124,7 @@ Read [req-template.md](req-template.md)。不要引用其他 skill。
 
 ## 调用顺序
 
-以对应 `examples/*.md` 为准，不要另写一套。速记：PiP 默认 XComponent 无第二参、视频页 `setAutoStartEnabled(true)`、进 PiP 不摘组件；窗 `setUIContext` 后 `start` 等 STARTED；球无页面；bind 两边未 start 再 bind；防窥 `aboutToAppear` 就听，`getWindowId` 先判空。
+以对应 `examples/*.md` 为准，不要另写一套。速记：PiP 默认 XComponent 无第二参、视频页 `setAutoStartEnabled(true)`、进 PiP 不摘组件；窗 `setUIContext` 后 `start` 等 STARTED；球无页面；bind 两边未 start 再 bind；防窥见 [examples/peep.md](examples/peep.md)。
 
 ## 反模式
 
@@ -132,6 +132,8 @@ Read [req-template.md](req-template.md)。不要引用其他 skill。
 - 把 `create` 成功当成已显示；只抄接口空壳没有 XComponent/AVPlayer
 - 未 bind 同时 start 窗和球，或与已启动 PiP 并行
 - `getWindowId()` 写成 `as number`；把页面/球文案改 `****` 当防窥
+- 声明了 `DLP_GET_HIDE_STATUS` 就当防窥已开；开关未开只在注释里写「去设置」、不上屏、不调 `requestAntiPeepOptions`
+- 改完 ets 不自己编，让用户去 DevEco 点编译
 - 在 `aboutToAppear` 里 start；在 `aboutToDisappear` 里 `stop` 导致退后台被自己关掉
 - 应用侧写 `setAutoStart`（必须 `setAutoStartEnabled`）
 

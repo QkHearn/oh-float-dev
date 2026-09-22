@@ -25,5 +25,5 @@
 4. 状态回调；退出 `stop*` + `off*`
 5. 画中画先读 `pip.md`。默认 XComponent：同一 controller + `create(config)` 无第二参，进 PiP 不摘组件。typeNode 不是一镜到底。改 `tpl` 后 `controlGroups` / `controlEvent` 必须同族。宿主 `@Entry` 必须能加载
 6. 球↔窗：`floatView.bind`，听 `IN_FLOATING_BALL`
-7. 防窥：`aboutToAppear` 注册 `antiPeepCB`；`HIDE` 用 `MAIN_WINDOW.getUIContext().getWindowId()`，先判空再 `showSystemMaskLayer`；不要 `as number`（10605999）；不要编 `FloatViewController` 防窥 API，不要用 `FloatViewProperties.windowId`，不要改文案当防窥
+7. 防窥：开关、回调、蒙层见 [peep.md](peep.md)
 8. 能编过：会抛 API 要 try/catch；禁止抄 `js-apis` 示例；见 [arkui-syntax.md](../docs/arkui-syntax.md)「写出来必须能编过」
