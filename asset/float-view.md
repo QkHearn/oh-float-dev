@@ -1,6 +1,6 @@
 # 闪控窗骨架（本地）
 
-步骤：[docs/guide-float-view.md](../docs/guide-float-view.md)。签名：[docs/js-apis-floatView.md](../docs/js-apis-floatView.md)。权限：[permissions.md](permissions.md)。
+步骤：[guide-float-view.md](../reference/guides/guide-float-view.md)。签名：[js-apis-floatView.md](../reference/apis/js-apis-floatView.md)。权限：[permissions.md](permissions.md)。
 
 拆成：`pages/Index.ets`（启动）+ `pages/FloatPanel.ets`（窗内容，须进 `main_pages.json`）。`setUIContext` 加载的是**另一份** `@Entry` 实例，不要把启动逻辑写进 FloatPanel。可点控件避开 `getWindowProperties().avoidArea`。
 

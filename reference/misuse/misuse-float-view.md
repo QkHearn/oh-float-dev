@@ -1,6 +1,6 @@
 # 闪控窗误用清单
 
-签名以 [docs/js-apis-floatView.md](docs/js-apis-floatView.md) 为准。本文件不列接口表。绑定/防窥步骤见 [docs/guide-float-view.md](docs/guide-float-view.md)（摘要，非官网全文）。
+签名以 [js-apis-floatView.md](../apis/js-apis-floatView.md) 为准。本文件不列接口表。绑定/防窥步骤见 [guide-float-view.md](../guides/guide-float-view.md)（摘要，非官网全文）。
 
 模块：`import { floatView } from '@kit.ArkUI'`  
 起始：API 26；仅 Stage。权限：`FLOAT_VIEW`（start）；bind 再加 `USE_FLOAT_BALL`。
@@ -37,7 +37,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 
 ## 防窥组合
 
-`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉系统蒙层，开关和抄写见 [examples/peep.md](examples/peep.md)。`getWindowId()` 先判空，不要 `as number`。不要用 `getWindowProperties().windowId`，不要改文案当防窥。系统提醒 ≠ 蒙层。
+`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉系统蒙层，开关和抄写见 [peep.md](../../asset/peep.md)。`getWindowId()` 先判空，不要 `as number`。不要用 `getWindowProperties().windowId`，不要改文案当防窥。系统提醒 ≠ 蒙层。
 
 ## 错误码（应用侧）
 

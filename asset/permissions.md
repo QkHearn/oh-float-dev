@@ -1,8 +1,17 @@
 # 权限（窗 / 球 / 防窥）
 
-纯 PiP 可跳过本文件。资料：[docs/declare-permissions.md](../docs/declare-permissions.md)、[docs/declare-permissions-in-acl.md](../docs/declare-permissions-in-acl.md)、[docs/restricted-permissions-float.md](../docs/restricted-permissions-float.md)。
+纯 PiP 可跳过本文件。资料：[declare-permissions.md](../reference/permissions/declare-permissions.md)、[declare-permissions-in-acl.md](../reference/permissions/declare-permissions-in-acl.md)、[restricted-permissions-float.md](../reference/permissions/restricted-permissions-float.md)。
 
-**1. 声明** — 目标模块 `src/main/module.json5` 的 `requestPermissions`（按能力裁剪）：
+按能力**裁剪**，不要三条都抄进只用其中一种的工程：
+
+| 能力 | `module.json5` + ACL | 运行时弹窗 |
+|------|----------------------|------------|
+| 仅闪控球 | `USE_FLOAT_BALL` | 不弹 |
+| 仅闪控窗 | `FLOAT_VIEW` | 弹 `FLOAT_VIEW` |
+| 绑定 | `FLOAT_VIEW` + `USE_FLOAT_BALL` | 只弹 `FLOAT_VIEW` |
+| 上面任一 + 防窥 | 再加 `DLP_GET_HIDE_STATUS` | `DLP_*` 不弹 |
+
+**1. 声明** — 目标模块 `src/main/module.json5` 的 `requestPermissions`（按下表裁剪；下面示例是绑定+防窥全量）：
 
 ```json5
 "requestPermissions": [
@@ -37,7 +46,7 @@
 
 **3. 运行时** — 只对 **user_grant 的 `FLOAT_VIEW`** 弹窗。`USE_FLOAT_BALL`、`DLP_GET_HIDE_STATUS` 是 system_grant，声明+ACL 后安装即授，不要弹窗。
 
-**4. 防窥开关（不是权限弹窗）** — ACL ≠ 系统「防窥保护」。原因见 [guide-dlp-anti-peep.md](../docs/guide-dlp-anti-peep.md)，代码见 [peep.md](peep.md)。
+**4. 防窥开关（不是权限弹窗）** — ACL ≠ 系统「防窥保护」。原因见 [guide-dlp-anti-peep.md](../reference/guides/guide-dlp-anti-peep.md)，代码见 [peep.md](peep.md)。
 
 ```ts
 import { abilityAccessCtrl, common, Permissions } from '@kit.AbilityKit';

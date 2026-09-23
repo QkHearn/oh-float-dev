@@ -1,6 +1,6 @@
 # 闪控球误用清单
 
-签名以 [docs/js-apis-floatingBall.md](docs/js-apis-floatingBall.md) 为准。本文件不列接口表。与窗联动见 [reference-float-view.md](reference-float-view.md) 绑定节。
+签名以 [js-apis-floatingBall.md](../apis/js-apis-floatingBall.md) 为准。本文件不列接口表。与窗联动见 [misuse-float-view.md](misuse-float-view.md) 绑定节。
 
 模块：`import { floatingBall } from '@kit.ArkUI'`  
 起始：API 20。权限：`USE_FLOAT_BALL`（start）；bind 时窗侧还要 `FLOAT_VIEW`。

@@ -1,6 +1,6 @@
 # 画中画（写程序先读本文件）
 
-步骤：[docs/guide-pip.md](../docs/guide-pip.md)。签名：[docs/js-apis-pipWindow.md](../docs/js-apis-pipWindow.md)。无特殊权限。
+步骤：[guide-pip.md](../reference/guides/guide-pip.md)。签名：[js-apis-pipWindow.md](../reference/apis/js-apis-pipWindow.md)。无特殊权限。
 
 再只读 **一条** 骨架。不要 XC 和 typeNode 接到同一个宿主、同时 `startPiP`。
 

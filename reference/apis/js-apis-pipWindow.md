@@ -596,7 +596,7 @@ startPiP(): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID    | 错误信息                                                |
 |------------|--------------------------------------------------------|
@@ -636,7 +636,7 @@ stopPiP(): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID   | 错误信息                          |
 |---------|-----------------------------------|
@@ -772,7 +772,7 @@ updateContentNode(contentNode: typeNode.XComponent): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息                                                                                                        |
 |-------|-------------------------------------------------------------------------------------------------------------|
@@ -843,7 +843,7 @@ getPiPWindowInfo(): Promise&lt;PiPWindowInfo&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息                                                                                                        |
 |-------|-------------------------------------------------------------------------------------------------------------|
@@ -888,7 +888,7 @@ getPiPSettingSwitch(): Promise&lt;boolean&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息                                                                                                        |
 |-------|-------------------------------------------------------------------------------------------------------------|
@@ -931,7 +931,7 @@ isPiPActive(): Promise&lt;boolean&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息       |
 |-------|-------------------------------------------------------------------------------------------------------------|
@@ -1195,7 +1195,7 @@ on(type: 'pipWindowSizeChange', callback: Callback&lt;PiPWindowSize&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------------------- |

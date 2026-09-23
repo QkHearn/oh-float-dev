@@ -1,5 +1,5 @@
 ---
-name: float-kit
+name: hmos-arkui-kit-window-floatwindow
 description: >-
   辅助 OpenHarmony 悬浮类需求开发：画中画（PiPWindow）、闪控窗（floatView）、闪控球（floatingBall）。
   覆盖能力分流、接口指南、代码查错（指出文件/行/错在哪并直接改）、按需求改用户工程里的 ArkTS、按评审稿写需求设计。
@@ -12,7 +12,24 @@ description: >-
 
 只处理三类应用辅助窗口。用户提到子窗 / `TYPE_FLOAT` / 模态窗时：**明确说不在本 Skill 范围**，给一句分流理由后停手。
 
-签名、权限、错误码以 [docs/](docs/README.md) 落盘为准。日常不要 WebFetch。不要凭本文件直接写页面。有应用工程就改现有文件。骨架只读 [examples/](examples/README.md) 对应文件。`reference-*.md` 只放误用要点。指导缺口见 docs/README「缺口」。
+签名、权限、错误码以 [reference/](reference/README.md) 落盘为准。日常不要 WebFetch。不要凭本文件直接写页面。有应用工程就改现有文件。骨架只读 [asset/](asset/README.md) 对应文件。`reference/misuse/misuse-*.md` 只放误用要点。指导缺口见 [reference/README](reference/README.md)「缺口」。
+
+## 目录
+
+```text
+hmos-arkui-kit-window-floatwindow/
+├── SKILL.md                      分流、模式、铁律（本文件）
+├── asset/                        可抄骨架；写程序只走这里
+│   └── README.md
+└── reference/                    官网落盘与评审；按子目录打开，不要通读
+    ├── README.md                 七类索引
+    ├── requirement-review.md     需求评审稿
+    ├── apis/                     js-apis 全文（只 Grep 节）
+    ├── guides/                   开发指导摘要
+    ├── permissions/              权限 + 错误码
+    ├── misuse/                   误用清单
+    └── engineering/              Stage / 语法 / 视觉
+```
 
 ## 何时用哪种模式
 
@@ -31,18 +48,18 @@ description: >-
 ```text
 进度:
 - [ ] 1. 判定能力：pip | float_view | floating_ball | bind | float_view+peep | pip+bind | pip+bind+peep | out_of_scope
-- [ ] 2. 按模式读文件（见下表），不要把 docs/ 整目录读完
-- [ ] 3. 按模式产出；写程序只抄 examples/，不要抄 js-apis 示例
+- [ ] 2. 按模式读文件（见下表），不要把 reference/ 整目录读完
+- [ ] 3. 按模式产出；写程序只抄 asset/，不要抄 js-apis 示例
 - [ ] 4. 改了 ets / json5：自己跑 hvigorw；交卷必须带 CompileArkTS 通过。无工程 / 无 hvigorw 则写明停手原因，禁止让用户去 DevEco 代编
 ```
 
 | 模式 | 读什么 |
 |------|--------|
-| **分流** | 本文件分流表。拿不准先问一句，不要 Read `docs/` |
-| **接口** | 对应 `js-apis-*.md` 的导入 / create·start / 权限 / 错误码**章节**（Grep 标题后 Read 该段） |
-| **查错** | 对应 `reference-*.md`；路径/权限再对 [docs/stage-layout.md](docs/stage-layout.md)；对上具体码再读 `errorcode-window-float.md` 该条目。**能定位到工作区文件就改掉** |
-| **写程序** | [examples/README.md](examples/README.md) + `merge.md` + 表里列出的骨架，再对照 [docs/stage-layout.md](docs/stage-layout.md) / [docs/arkui-syntax.md](docs/arkui-syntax.md) / [docs/ui-style.md](docs/ui-style.md)。禁止通读 `js-apis-*.md`；签名对不上才 Grep 该节 |
-| **需求设计** | [req-template.md](req-template.md)；写接口章时再读 `js-apis` 对应节 |
+| **分流** | 本文件分流表。拿不准先问一句，不要 Read `reference/` |
+| **接口** | 先读对应 `reference/guides/guide-*.md`（球无 guide 则 [misuse-floating-ball.md](reference/misuse/misuse-floating-ball.md)）。`reference/apis/js-apis-*.md` **只 Grep 标题后 Read 该节**，禁止整文件 Read |
+| **查错** | 先读对应 `reference/misuse/misuse-*.md`。路径/权限再对 [stage-layout.md](reference/engineering/stage-layout.md)。错误码只 Grep `reference/permissions/errorcode-window-float.md` **对上的那一条**，禁止整文件 Read。**能定位到工作区文件就改掉** |
+| **写程序** | 只按 [asset/README.md](asset/README.md) **表里那一行**读齐，再对照 [stage-layout.md](reference/engineering/stage-layout.md) / [arkui-syntax.md](reference/engineering/arkui-syntax.md) / [ui-style.md](reference/engineering/ui-style.md)。禁止通读 `reference/apis/js-apis-*.md`；签名对不上才 Grep `reference/apis/` 该节 |
+| **需求设计** | [reference/requirement-review.md](reference/requirement-review.md)。写接口章时 Grep `reference/apis/js-apis` **对应节**，禁止整文件 Read |
 
 ### 1. 分流（必做）
 
@@ -55,7 +72,7 @@ description: >-
 | 贴边小球；不能自定义 UI | **闪控球** | `floatingBall` |
 | 点击球展开窗、点窗缩小回球 | **绑定** | `floatView.bind` |
 | 闪控窗持续展示 + 窥视时系统蒙层 | **闪控窗 + 防窥** | `floatView` + `dlpAntiPeep` |
-| 会议/视频画中画 **和** 球窗出现在同一 demo | **叠加** | 入口列表；运行时互斥，见 [examples/merge.md](examples/merge.md) |
+| 会议/视频画中画 **和** 球窗出现在同一 demo | **叠加** | 入口列表；运行时互斥，见 [asset/merge.md](asset/merge.md) |
 | `createSubWindow` / `TYPE_FLOAT` / 模态窗 | **范围外** | 停手 |
 | 视频小窗但不要 PiP 控制条、要自定义页 | **不要用 PiP**；用闪控窗 |
 
@@ -72,7 +89,7 @@ description: >-
 | 会议、开会 | `VIDEO_MEETING` |
 | 直播 | `VIDEO_LIVE` |
 
-对照 [examples/pip.md](examples/pip.md) 三列表，不要只改枚举却留播放事件。
+对照 [asset/pip.md](asset/pip.md) 三列表，不要只改枚举却留播放事件。
 
 闪控球 `FloatingBallTemplate`：静态 `STATIC`（title+icon，禁 update）；标题+内容 `NORMAL`；强调 `EMPHATIC`；一行标题 `SIMPLE`。未说则 `EMPHATIC`。
 
@@ -90,11 +107,13 @@ description: >-
 
 ### 3. 接口模式
 
-按能力输出一张表：导入与 API 等级、权限三处、调用顺序、模板约束、常见错误码。Grep/Read 该能力 `js-apis` 对应节，不要通读全文。
+按能力输出一张表：导入与 API 等级、权限三处、调用顺序、模板约束、常见错误码。
+
+读法：**先**对应 `reference/guides/guide-*.md`（闪控球没有 guide，改读 `reference/misuse/misuse-floating-ball.md`）。需要签名时再 Grep `reference/apis/js-apis-*.md` 的导入 / create·start / 权限 / 错误码**标题**，只 Read 命中的那一节。禁止 Read 整个 `js-apis-*.md`，禁止 Grep 工作区框架仓。
 
 ### 4. 查错模式
 
-对照 `reference-*.md` 误用清单；能改文件就改。输出按出现顺序：
+对照对应能力的 `reference/misuse/misuse-*.md`；能改文件就改。不要先打开 `js-apis-*.md` 或整份错误码。对上具体码再 Grep `reference/permissions/errorcode-window-float.md` **那一条**。输出按出现顺序：
 
 ```markdown
 ### E<n> [<能力>] <一句话问题>
@@ -107,24 +126,24 @@ description: >-
 
 ### 5. 写程序模式
 
-**先读骨架再改文件。** 不要抄 `docs/js-apis-*.md` 示例当可粘贴代码。
+**先读骨架再改文件。** 不要抄 `reference/apis/js-apis-*.md` 示例当可粘贴代码。
 
-1. [examples/README.md](examples/README.md) 选路径；`merge.md` + 表里骨架。画中画默认 [examples/pip-xcomponent.md](examples/pip-xcomponent.md)；绑定+防窥读 `bind.md` + `peep.md`；叠加读 merge 叠加节。
-2. [docs/stage-layout.md](docs/stage-layout.md) 落点。有 `module.json5` + `main_pages.json`、用户给了路径、即使 `ets/pages` 为空也补文件。仅 OHOS 框架仓、没有应用模块才停手问路径。
-3. [docs/arkui-syntax.md](docs/arkui-syntax.md)「写出来必须能编过」+ [docs/ui-style.md](docs/ui-style.md)
-4. **自己编译**：命令见 [docs/stage-layout.md](docs/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `js-apis` **某一节**，禁止把 `js-apis-*.md` 当骨架通读
-5. **防窥开关**：见 [examples/peep.md](examples/peep.md)
+1. 只按 [asset/README.md](asset/README.md) 的表读齐。不要在本文件另开捷径；不要跳过 `pip.md` 直接抄 xcomponent；绑定不要再抄一份 `floating-ball.md` 整页 Index。
+2. [reference/engineering/stage-layout.md](reference/engineering/stage-layout.md) 落点。有 `module.json5` + `main_pages.json`、用户给了路径、即使 `ets/pages` 为空也补文件。仅 OHOS 框架仓、没有应用模块才停手问路径。
+3. [reference/engineering/arkui-syntax.md](reference/engineering/arkui-syntax.md)「写出来必须能编过」+ [reference/engineering/ui-style.md](reference/engineering/ui-style.md)
+4. **自己编译**：命令见 [reference/engineering/stage-layout.md](reference/engineering/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `reference/apis/js-apis` **某一节**，禁止 Read 整个 `js-apis-*.md`
+5. 表里有防窥才读 [asset/peep.md](asset/peep.md)，往已有页里加，不要另起一页
 
 - ArkTS error / throw / deprecated / `as number` → 改刚写的 ets
 - 缺 `DeviceSecurityKit` DTS → 说明 SDK，不要改成文案防窥
 
 ### 6. 需求设计模式
 
-Read [req-template.md](req-template.md)。不要引用其他 skill。
+Read [reference/requirement-review.md](reference/requirement-review.md)。不要引用其他 skill。
 
 ## 调用顺序
 
-以对应 `examples/*.md` 为准，不要另写一套。速记：PiP 默认 XComponent 无第二参、视频页 `setAutoStartEnabled(true)`、进 PiP 不摘组件；窗 `setUIContext` 后 `start` 等 STARTED；球无页面；bind 两边未 start 再 bind；防窥见 [examples/peep.md](examples/peep.md)。
+以对应 `asset/*.md` 为准，不要另写一套。速记：PiP 默认 XComponent 无第二参、视频页 `setAutoStartEnabled(true)`、进 PiP 不摘组件；窗 `setUIContext` 后 `start` 等 STARTED；球无页面；bind 两边未 start 再 bind；防窥见 [asset/peep.md](asset/peep.md)。
 
 ## 反模式
 
@@ -137,4 +156,4 @@ Read [req-template.md](req-template.md)。不要引用其他 skill。
 - 在 `aboutToAppear` 里 start；在 `aboutToDisappear` 里 `stop` 导致退后台被自己关掉
 - 应用侧写 `setAutoStart`（必须 `setAutoStartEnabled`）
 
-其余见对应 `reference-*.md`。
+其余见对应 `reference/misuse/misuse-*.md`。

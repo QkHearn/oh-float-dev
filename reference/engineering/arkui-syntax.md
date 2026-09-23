@@ -54,7 +54,7 @@ struct Index {
 
 ## 写出来必须能编过（ArkTS）
 
-写程序只抄 [examples/](../examples/README.md)，**不要**把 `docs/js-apis-*.md` 示例当可粘贴代码。
+写程序只抄 [asset/](../../asset/README.md)，**不要**把 `js-apis-*.md` 示例当可粘贴代码。
 
 - 会抛的 API 必须 `try/catch`，`const err = e as BusinessError`：`getWindowId`、`requestPermissionsFromUser`、`createAVPlayer`、`getRawFd`、`setVolume`、`off*`
 - `getWindowId()` 是 `number | undefined`，`!== undefined` 再传；禁止 `as number`（运行时 10605999）

@@ -1,12 +1,14 @@
 # 闪控窗 + 防窥（本地）
 
-指导：[docs/guide-float-view.md](../docs/guide-float-view.md) 组合节、[docs/guide-dlp-anti-peep.md](../docs/guide-dlp-anti-peep.md)。权威：[闪控窗开发指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/float-view-guide#%E5%A4%8D%E6%9D%82%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%98%B2%E7%AA%A5%E4%BF%9D%E6%8A%A4%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8)「复杂场景：与防窥保护组合使用」。
+往已有 Index / FloatPanel / EntryAbility **里加**，不是单独一页。先有闪控窗（或绑定）骨架，再抄本文件。
+
+指导：[guide-float-view.md](../reference/guides/guide-float-view.md) 组合节、[guide-dlp-anti-peep.md](../reference/guides/guide-dlp-anti-peep.md)。权威：[闪控窗开发指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/float-view-guide#%E5%A4%8D%E6%9D%82%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%98%B2%E7%AA%A5%E4%BF%9D%E6%8A%A4%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8)「复杂场景：与防窥保护组合使用」。
 
 **防窥 = 系统蒙层。** 系统「防窥提醒」和蒙层是两件事：提醒可以自己出来，蒙层必须应用在 `antiPeepCB` 里加。`HIDE` 时按官网拿 **主窗** `AppStorage.get('MAIN_WINDOW').getUIContext().getWindowId()`，走 `showSystemMaskLayer`（内部 `setAntiPeepMaskLayer`）。不要用 `FloatViewProperties.windowId`，不要改 `FloatPanel` 文案，不要 `updateFloatingBall` 换成 `****`。
 
 一人看屏是 `PASS`，**不会出蒙层**。须有非机主同时看屏，或 demo 页「拉起蒙层」主动调同一套 windowId。失败码要上屏：`201` 多半是签名 ACL 没加 `DLP_GET_HIDE_STATUS`。
 
-开关（ACL ≠ 防窥保护）见 [guide-dlp-anti-peep.md](../docs/guide-dlp-anti-peep.md)；下面抄代码，不要静默 `return`。
+开关（ACL ≠ 防窥保护）见 [guide-dlp-anti-peep.md](../reference/guides/guide-dlp-anti-peep.md)；下面抄代码，不要静默 `return`。
 
 落点：
 

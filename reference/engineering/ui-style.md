@@ -73,7 +73,7 @@ Column() {
 .backgroundColor($r('sys.color.ohos_id_color_background'))
 ```
 
-有画面时：布局 `XComponent` 在上，按钮条贴底，间距仍 12vp。不要 `.clip(true)`（会裁掉 surface，一镜到底也没了）。不要先画一页只有按钮的启动页再把画面漏掉。组件写法跟 [pip-xcomponent.md](../examples/pip-xcomponent.md)：`XComponent(this.options)`，高 `800px`。不要旧 `{ id, type, controller }`，不要 `height(200)` 当一镜到底样例。
+有画面时：布局 `XComponent` 在上，按钮条贴底，间距仍 12vp。不要 `.clip(true)`（会裁掉 surface，一镜到底也没了）。不要先画一页只有按钮的启动页再把画面漏掉。组件写法跟 [pip-xcomponent.md](../../asset/pip-xcomponent.md)：`XComponent(this.options)`，高 `800px`。不要旧 `{ id, type, controller }`，不要 `height(200)` 当一镜到底样例。
 
 ## 闪控窗内容页（`pages/FloatPanel`）
 

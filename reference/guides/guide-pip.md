@@ -8,7 +8,7 @@
 | [使用 typeNode](https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/pipwindow-typenode) | 仅用户明确要迁自定义节点。`create(config, contentNode)`。**不是一镜到底**（系统拿不到源矩形） |
 | 使用 NDK | 本 skill **不写** C/C++ |
 
-完整签名以 [js-apis-pipWindow.md](js-apis-pipWindow.md) 为准。本文是步骤摘要。骨架见 [examples/pip.md](../examples/pip.md)。日常不要打开官网。
+完整签名以 [js-apis-pipWindow.md](../apis/js-apis-pipWindow.md) 为准。本文是步骤摘要。骨架见 [pip.md](../../asset/pip.md)。日常不要打开官网。
 
 ## 一镜到底
 
@@ -26,7 +26,7 @@ typeNode 路径源码直接打 `use typeNode, unable to locate source rect`，�
 
 ## Navigation 避坑（写程序先判定，再填 config）
 
-先看工程怎么管页。写新 demo 用宿主 `Navigation` + `Page1`（[examples/pip.md](../examples/pip.md)）。**不要**给已经是单页、没有 Navigation 的 `Index` 再包一层。
+先看工程怎么管页。写新 demo 用宿主 `Navigation` + `Page1`（[pip.md](../../asset/pip.md)）。**不要**给已经是单页、没有 Navigation 的 `Index` 再包一层。
 
 | 工程现状 | `navigationId` | 还原 |
 |----------|----------------|------|
@@ -94,14 +94,14 @@ pushPath → Page1 根节点 NavDestination
 3. `canIUse` + `isPiPEnabled` → 视频页按钮 `create(config)` 无第二参（只一次）→ `on('stateChange')` / `on('controlEvent')` → `startPiP`
 4. 「退出后继续播」：在**已经停在视频页**后 `setAutoStartEnabled(true)`。系统「智慧多窗 → 自动启动画中画」关闭则不会**自动**拉起，按钮 `startPiP` 不受影响。不要在 `onPageHide` / `aboutToDisappear` 里 `stopPiP`
 5. 失败要有页面提示。不要用没 surface 挡住 start。以 `STARTED` 为准。**不要** `ABOUT_TO_START` 摘组件
-6. `controlGroups` / `controlEvent` 必须与 `templateType` 同族，见 [examples/pip.md](../examples/pip.md)
+6. `controlGroups` / `controlEvent` 必须与 `templateType` 同族，见 [pip.md](../../asset/pip.md)
 7. 用户点停止才关；进 PiP 时页面还在，不要 release 播放器
 
 片源：模块 `resources/rawfile/test.mp4`。`contentWidth`/`contentHeight` 建议显式传入。
 
 ## typeNode（迁节点，不是一镜到底）
 
-1:1 官方 [WindowPip Navigation typeNode](https://gitcode.com/HarmonyOS_Samples/guide-snippets/tree/master/ArkUIWindowPipSamples/WindowPip)。骨架：[examples/pip-typenode.md](../examples/pip-typenode.md)。
+1:1 官方 [WindowPip Navigation typeNode](https://gitcode.com/HarmonyOS_Samples/guide-snippets/tree/master/ArkUIWindowPipSamples/WindowPip)。骨架：[pip-typenode.md](../../asset/pip-typenode.md)。
 
 ```text
 Page1 根节点 NavDestination + NodeContainer

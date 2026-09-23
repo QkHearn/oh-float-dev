@@ -1,6 +1,6 @@
 # 画中画骨架：页面 XComponent（一镜到底）
 
-结构对齐官方 WindowPip 的 XComponent 路径，视觉按 [docs/ui-style.md](../docs/ui-style.md)。`create(config)` **无第二参**。布局 `XComponent` 与 `componentController` 必须同一个。
+结构对齐官方 WindowPip 的 XComponent 路径，视觉按 [ui-style.md](../reference/engineering/ui-style.md)。`create(config)` **无第二参**。布局 `XComponent` 与 `componentController` 必须同一个。
 
 进 PiP **不要**摘 `XComponent`，**不要**重建 / `release` 播放器。
 

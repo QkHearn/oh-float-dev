@@ -1,6 +1,6 @@
 # 画中画误用清单
 
-签名以 [docs/js-apis-pipWindow.md](docs/js-apis-pipWindow.md) 为准。本文件不列接口表。调用顺序与页面加载以 [examples/pip.md](examples/pip.md) 为准。
+签名以 [js-apis-pipWindow.md](../apis/js-apis-pipWindow.md) 为准。本文件不列接口表。调用顺序与页面加载以 [pip.md](../../asset/pip.md) 为准。
 
 模块：`import { PiPWindow } from '@kit.ArkUI'`（typeNode 路径再加 `typeNode`）  
 起始：API 11；typeNode 路径 API 12+。无特殊 `ohos.permission.*`。  
@@ -25,7 +25,7 @@ syscap：`SystemCapability.Window.SessionManager`
 ## 易错约束
 
 - `context`：组件内 `getHostContext()` 转为 `UIAbilityContext`
-- `controlGroups` / `controlEvent` 必须与 `templateType` 同族，最多 3 个；`VIDEO_PLAY` 下 101 与 102 互斥。对照 [examples/pip.md](examples/pip.md) 模板表
+- `controlGroups` / `controlEvent` 必须与 `templateType` 同族，最多 3 个；`VIDEO_PLAY` 下 101 与 102 互斥。对照 [pip.md](../../asset/pip.md) 模板表
 - 宿主 `@Entry` 必须进 `main_pages.json`；`Page1` 根节点必须是 `NavDestination()`，否则二级页白屏
 - 用 Navigation 则 `navigationId` 与 `Navigation.id` 同一字符串；单页不要写。Index 进 PipHost 可用 `getRouter().pushUrl`（PiP 尚未 start）；`startPiP` 之后禁止再切页
 - 在**视频页**再 `setAutoStartEnabled(true)`。首页就 true，还原会回到首页

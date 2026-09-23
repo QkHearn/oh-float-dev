@@ -561,7 +561,7 @@ The PiP window state is abnormal.
 
 ### 画中画窗口销毁后访问导致崩溃
 **可能原因**<br>
-开发者在画中画窗口销毁后（如用户退出画中画、窗口生命周期结束等）调用画中画窗口[stopPiP()](js-apis-pipWindow.md#stoppip)接口，触发错误码1300012。
+开发者在画中画窗口销毁后（如用户退出画中画、窗口生命周期结束等）调用画中画窗口[stopPiP()](../apis/js-apis-pipWindow.md#stoppip)接口，触发错误码1300012。
 
 **典型日志信息**<br>
 ```text
@@ -607,7 +607,7 @@ async stopPiPSafely(pipController: PiPController) {
 
 ### 画中画窗口重复启动导致崩溃
 **可能原因**<br>
-开发者在画中画窗口处于已经启动或正在启动中的状态时，调用画中画窗口[startPiP()](js-apis-pipWindow.md#startpip)接口，触发错误码1300012。
+开发者在画中画窗口处于已经启动或正在启动中的状态时，调用画中画窗口[startPiP()](../apis/js-apis-pipWindow.md#startpip)接口，触发错误码1300012。
 
 **典型日志信息**<br>
 ```text
@@ -772,7 +772,7 @@ Wrong parameters for operating the floating ball.
 
 4. 检查是否有未传入的必传参数。
 
-闪控球相关参数具体可见[FloatingBallParams](js-apis-floatingBall.md#floatingballparams)。
+闪控球相关参数具体可见[FloatingBallParams](../apis/js-apis-floatingBall.md#floatingballparams)。
 
 ## 1300020 创建闪控球窗口失败
 
@@ -996,9 +996,9 @@ Repeated operations on the float view.
 
 **处理步骤**
 
-1. 建议通过[onStateChange](js-apis-floatView.md#onstatechange)获取当前状态变化。启动闪控窗前，检查闪控窗是否处于已启动的状态。
+1. 建议通过[onStateChange](../apis/js-apis-floatView.md#onstatechange)获取当前状态变化。启动闪控窗前，检查闪控窗是否处于已启动的状态。
 
-2. 建议通过[onStateChange](js-apis-floatView.md#onstatechange)获取当前状态变化。停止闪控窗前，检查闪控窗是否处于已停止的状态。
+2. 建议通过[onStateChange](../apis/js-apis-floatView.md#onstatechange)获取当前状态变化。停止闪控窗前，检查闪控窗是否处于已停止的状态。
 
 3. 注册闪控窗回调前，确保回调未注册。
 

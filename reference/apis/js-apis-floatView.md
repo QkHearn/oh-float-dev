@@ -1,7 +1,7 @@
 # @ohos.window.floatView (闪控窗)
 
 > Skill 落盘。权威：https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-floatview  
-> 刷新：用户要求同步官网时 WebFetch 该 URL 覆盖本文；空壳则保持不动。指导页另见 [guide-float-view.md](guide-float-view.md)。
+> 刷新：用户要求同步官网时 WebFetch 该 URL 覆盖本文；空壳则保持不动。指导页另见 [guide-float-view.md](../guides/guide-float-view.md)。
 
 <!--Kit: ArkUI-->
 <!--Subsystem: Window-->
@@ -20,7 +20,7 @@
 - 股市盯盘应用：用户在浏览其他应用时，通过闪控窗实时查看股票行情变化，无需频繁切换应用。
 - 手机直播应用：主播在直播过程中使用闪控窗展示自定义的互动面板或控制界面，方便实时操作和互动。
 
-**相关对比**：[闪控球和闪控窗的对比](../../windowmanager/window-type-overview.md#闪控球和闪控窗的对比)、[全局悬浮窗和闪控窗的对比](../../windowmanager/window-type-overview.md#全局悬浮窗和闪控窗的对比)
+**相关对比**：[闪控球和闪控窗的对比](../guides/window-type-overview.md#闪控球和闪控窗的对比)、[全局悬浮窗和闪控窗的对比](../guides/window-type-overview.md#全局悬浮窗和闪控窗的对比)
 
 **起始版本：** 26.0.0
 
@@ -88,7 +88,7 @@ create(config: FloatViewConfiguration): Promise&lt;FloatViewController&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -175,7 +175,7 @@ bind(floatViewController: FloatViewController, floatingBallController: floatingB
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -249,7 +249,7 @@ unbind(floatViewController: FloatViewController, floatingBallController: floatin
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -315,7 +315,7 @@ getFloatViewLimits(templateType: FloatViewTemplateType): FloatViewLimits
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -406,7 +406,7 @@ setUIContext(path: string, storage?: LocalStorage): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -461,7 +461,7 @@ setUIContextByName(name: string, storage?: LocalStorage): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -543,7 +543,7 @@ setWindowSize(size: window.Size): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -600,7 +600,7 @@ switchTemplate(templateProperty: TemplateProperty): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -658,7 +658,7 @@ start(): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -708,7 +708,7 @@ stop(): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -763,7 +763,7 @@ setFloatViewVisibilityInApp(isVisible: boolean): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -814,7 +814,7 @@ restoreMainWindow(wantParameters?: Record&lt;string, Object&gt;): Promise&lt;voi
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -866,7 +866,7 @@ getWindowProperties(): FloatViewProperties
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -905,7 +905,7 @@ onStateChange(callback: Callback&lt;FloatViewStateChangeInfo&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -947,7 +947,7 @@ offStateChange(callback?: Callback&lt;FloatViewStateChangeInfo&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -988,7 +988,7 @@ onRectChange(callback: Callback&lt;FloatViewRectChangeInfo&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -1030,7 +1030,7 @@ offRectChange(callback?: Callback&lt;FloatViewRectChangeInfo&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -1071,7 +1071,7 @@ onLimitsChange(callback: Callback&lt;FloatViewLimits&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|
@@ -1113,7 +1113,7 @@ offLimitsChange(callback?: Callback&lt;FloatViewLimits&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](errorcode-window.md)。
+以下错误码的详细介绍请参见[窗口错误码](../permissions/errorcode-window-float.md)。
 
 | 错误码ID | 错误信息 |
 |------------|------------|

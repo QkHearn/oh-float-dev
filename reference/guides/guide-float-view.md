@@ -3,7 +3,7 @@
 官网：https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/float-view-guide  
 锚点「复杂场景与防窥保护组合使用」：https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/float-view-guide#%E5%A4%8D%E6%9D%82%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%98%B2%E7%AA%A5%E4%BF%9D%E6%8A%A4%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8
 
-完整接口签名、示例代码以同目录 [js-apis-floatView.md](js-apis-floatView.md)、[js-apis-floatingBall.md](js-apis-floatingBall.md) 为准。刷新时用官网指导页覆盖本文。
+完整接口签名、示例代码以 [js-apis-floatView.md](../apis/js-apis-floatView.md)、[js-apis-floatingBall.md](../apis/js-apis-floatingBall.md) 为准。刷新时用官网指导页覆盖本文。
 
 ## 选型
 
@@ -18,7 +18,7 @@
 ## 开发步骤
 
 1. `canIUse('SystemCapability.Window.SessionManager')` 且 `floatView.isFloatViewEnabled()`
-2. 权限见 [restricted-permissions-float.md](restricted-permissions-float.md) + [declare-permissions.md](declare-permissions.md) + [declare-permissions-in-acl.md](declare-permissions-in-acl.md)：`ohos.permission.FLOAT_VIEW`（user_grant，要 reason/usedScene 和运行时弹窗）；绑定还要 `ohos.permission.USE_FLOAT_BALL`（system_grant，不弹窗）
+2. 权限见 [restricted-permissions-float.md](../permissions/restricted-permissions-float.md) + [declare-permissions.md](../permissions/declare-permissions.md) + [declare-permissions-in-acl.md](../permissions/declare-permissions-in-acl.md)：`ohos.permission.FLOAT_VIEW`（user_grant，要 reason/usedScene 和运行时弹窗）；绑定还要 `ohos.permission.USE_FLOAT_BALL`（system_grant，不弹窗）
 3. `floatView.create(config)` 只拿控制器，不建窗。**只 create 一次**，不要每次点启动都 new
 4. `setUIContext(path)` 或 `setUIContextByName`；path 与 `main_pages.json` 的 src 一致。加载的是另一份 `@Entry`（`FloatPanel`），不是 Index
 5. `onStateChange`；主窗前台后 `start()`
@@ -36,7 +36,7 @@
 - `stop` 任一即两边一起停；都停下后才能 unbind
 - 权限：`FLOAT_VIEW` + `USE_FLOAT_BALL`
 
-未绑定同时 start 窗和球、或与已启动 PiP 并行 → `1300034`，见 [errorcode-window-float.md](errorcode-window-float.md)。
+未绑定同时 start 窗和球、或与已启动 PiP 并行 → `1300034`，见 [errorcode-window-float.md](../permissions/errorcode-window-float.md)。
 
 ## 复杂场景与防窥保护组合使用
 
@@ -47,7 +47,7 @@
 接口细节见 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md)。组合要点（按官网示例抄）：
 
 1. 声明 `ohos.permission.DLP_GET_HIDE_STATUS`（受限、system_grant、ACL），与 `FLOAT_VIEW` 并列
-2. 开关未开：按 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) + [examples/peep.md](../examples/peep.md)，不要静默跳过
+2. 开关未开：按 [guide-dlp-anti-peep.md](guide-dlp-anti-peep.md) + [peep.md](../../asset/peep.md)，不要静默跳过
 3. `EntryAbility` 把主窗写入 `AppStorage.setOrCreate('MAIN_WINDOW', ...)`
 4. 页面 `aboutToAppear`：`getDlpAntiPeepInfo()` 同步一次，再 `listenOnAntiPeepStatus(this.antiPeepCB)`。**不要等闪控窗 STARTED**
 5. `HIDE`：取出 `MAIN_WINDOW` 后 `const windowId: number | undefined = w.getUIContext().getWindowId(); if (windowId !== undefined) { showSystemMaskLayer(windowId); }`。闪控窗页同样先判空再存/再蒙。官网写成 `as number` 会 `10605999`。**不要**用 `getLastWindow` / `FloatViewProperties.windowId`

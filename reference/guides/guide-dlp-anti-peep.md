@@ -9,7 +9,7 @@
 
 - 导入：`import { dlpAntiPeep } from '@kit.DeviceSecurityKit'`
 - syscap：`SystemCapability.Security.DlpAntiPeep`，调用前 `canIUse`，不支持则整段跳过
-- 权限：`ohos.permission.DLP_GET_HIDE_STATUS`（见 [restricted-permissions-float.md](restricted-permissions-float.md)）
+- 权限：`ohos.permission.DLP_GET_HIDE_STATUS`（见 [restricted-permissions-float.md](../permissions/restricted-permissions-float.md)）
   - 级别 system_basic，授权方式 system_grant（声明 + ACL，不弹窗）
   - 支持设备：Phone；API20 起对普通应用开放
 - 用户须在「设置 > 隐私与安全 > 防窥保护」打开本应用。声明 `DLP_GET_HIDE_STATUS` **不会**自动打开该开关

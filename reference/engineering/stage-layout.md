@@ -49,9 +49,9 @@ Project/
 | `resources/rawfile/test.mp4` | 画中画示例片源 | 默认骨架读这个 rawfile；没有则播放器失败、小窗黑 |
 | `ets/pages/FloatPanel.ets` | 闪控窗内容页 | `setUIContext('pages/FloatPanel')` 的目标；也要 `@Entry` |
 | `resources/base/profile/main_pages.json` | 页面注册 | 路径须与 `setUIContext` / `loadContent` 的字符串一致，禁止相对路径 |
-| `module.json5` | 模块配置 + 权限 | `requestPermissions`；详见 [declare-permissions.md](declare-permissions.md) |
+| `module.json5` | 模块配置 + 权限 | `requestPermissions`；详见 [declare-permissions.md](../permissions/declare-permissions.md) |
 | `resources/*/element/string.json` | 字符串 | `FLOAT_VIEW` 的 `reason` |
-| 签名 Profile | ACL | 调试签名；详见 [declare-permissions-in-acl.md](declare-permissions-in-acl.md) |
+| 签名 Profile | ACL | 调试签名；详见 [declare-permissions-in-acl.md](../permissions/declare-permissions-in-acl.md) |
 | `ets/entryability/EntryAbility.ets` | Ability | `onWindowStageCreate` → `windowStage.loadContent('pages/Index')`。主窗 show 在这之后，不在页面 `aboutToAppear`。防窥：`loadContent` 成功后把主窗写入 `AppStorage` 的 `MAIN_WINDOW` |
 
 `main_pages.json` 示例：
@@ -73,7 +73,7 @@ Project/
 
 禁止往 `window_window_manager/`、`foundation/`、`interface/` 等框架源码里写应用 ArkTS。本 Skill 只改 **应用工程**。
 
-1. **已有应用工程且 `ets/pages/*.ets` 在**：按 [examples/merge.md](../examples/merge.md) 改现有文件。画中画按 [examples/pip.md](../examples/pip.md) 建可加载宿主 + `Page1`。闪控窗没有内容页才 **新建** `FloatPanel.ets` 并登记。闪控球不要新建球页。
+1. **已有应用工程且 `ets/pages/*.ets` 在**：按 [merge.md](../../asset/merge.md) 改现有文件。画中画按 [pip.md](../../asset/pip.md) 建可加载宿主 + `Page1`。闪控窗没有内容页才 **新建** `FloatPanel.ets` 并登记。闪控球不要新建球页。
 2. **用户给了应用路径，且已有 `module.json5` + `main_pages.json`，但 `ets/pages` 为空**：按骨架**补文件**，不要问路径。
 3. **找不到应用模块**：没有 `module.json5`（常见：工作区是 OHOS 源码仓、只有 WMS）。**停手问用户应用工程路径**。不要在当前仓根下新建 `entry/`，不要把 demo 写进框架目录。
 4. **用户明确只要脚手架、且已给应用路径**：按上表在该路径 **创建** `entry/src/main/...`。只建页面 `.ets` + `main_pages.json` + 权限相关 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。

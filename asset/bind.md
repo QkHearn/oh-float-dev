@@ -1,8 +1,15 @@
 # 窗 + 球绑定（本地）
 
-细节：[reference-float-view.md](../reference-float-view.md) 绑定节。两边都 `create` 且**都未 start**，再 bind，再 start 其中一个。权限：`FLOAT_VIEW` 弹窗 + `USE_FLOAT_BALL` 不弹窗。
+细节：[misuse-float-view.md](../reference/misuse/misuse-float-view.md) 绑定节。两边都 `create` 且**都未 start**，再 bind，再 start 其中一个。权限：`FLOAT_VIEW` 弹窗 + `USE_FLOAT_BALL` 不弹窗（[permissions.md](permissions.md)）。
 
-并进现有 `Index.ets`，内容页仍用 `FloatPanel.ets`。未说球样式用 `EMPHATIC`（用户说只要一行标题才 `SIMPLE`）。
+**怎么拼（只出一套 Index）：**
+
+1. 抄 [float-view.md](float-view.md) 的 `pages/Index.ets` 外壳 + `pages/FloatPanel.ets`
+2. 把 Index 里的 `start()` **整段换成**下面的 `bindAndStart`
+3. `requestPerms` 抄 [permissions.md](permissions.md)
+4. **不要**抄 [floating-ball.md](floating-ball.md) 整页，也**不要**再调 `startFloatingBall`
+
+未说球样式用 `EMPHATIC`（用户说只要一行标题才 `SIMPLE`）。
 
 ```ts
 import { floatView, floatingBall } from '@kit.ArkUI';
