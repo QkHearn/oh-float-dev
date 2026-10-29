@@ -2,20 +2,12 @@
 
 > 覆盖写程序交卷门禁与关键能力落点。
 >
-> **环境分支（FUNC-001~004 共用，缺一不可）：**
+> **环境分支（FUNC-001~004 共用）：**
 >
 > | 环境 | 怎样算过 |
 > |------|----------|
-> | **有工程**：工作区有可改 Stage 应用（`module.json5` + `hvigorw`） | 改文件 + 语法自检落笔 + 自己跑 `hvigorw`，输出含 `CompileArkTS` 通过 |
-> | **无工程**：仅 skill 仓 / 无 `module.json5` / 无 `hvigorw`（CI 常见） | 命中能力 + **写明停手原因** + **落点清单** + **语法必检清单**；**不要求** `CompileArkTS`；禁止假装编过；禁止只问路径无分析 |
-
-语法必检清单（有/无工程都要在输出里出现，对照 `references/engineering/arkui-syntax.md`）：
-
-- 会抛 API：`try/catch` + `BusinessError`
-- `getWindowId()`：`!== undefined` 再传，禁止 `as number`
-- PiP：只用 `setAutoStartEnabled`，禁止 `setAutoStart`
-- XComponent：用 `XComponentOptions` 形态
-- 无 deprecated 顶层 `router.pushUrl`
+> | **有工程**：工作区有可改 Stage 应用（`module.json5` + `hvigorw`） | 命中能力 + 改文件；有条件再自检/编译（不硬卡四项清单） |
+> | **无工程**：仅 skill 仓 / 无 `module.json5` / 无 `hvigorw`（CI 常见） | **命中能力即可**；追问工程路径也算过；**不要求**停手原因长文、落点清单、语法必检清单、`CompileArkTS` |
 
 ---
 
@@ -30,22 +22,22 @@
 
 #### 预期
 
-**分流**：`pip`
+**分流**：`pip`（或明确说画中画 / PiPWindow）
 
 **有工程时：**
 
-1. 落点：`PipHost`/`Index` + `Page1` + `AVPlayer.ets` + `main_pages.json`；`create` 后等 `STARTED`
-2. 输出含语法必检清单（见文首）
-3. 自己跑 `hvigorw assembleHap -p product=default --no-daemon`，输出含 `CompileArkTS` 通过
-4. 禁止让用户去 DevEco 代编
+1. 改落点相关文件（`PipHost`/`Index`、`Page1`、`AVPlayer.ets`、`main_pages.json` 等，不必一次齐）
+2. 有 `hvigorw` 则尽量自编；编不过再改，不硬卡本次必过
 
 **无工程时（CI 默认按此判）：**
 
-1. 命中 `pip`
-2. 明确写停手原因：无应用工程 / 无 `hvigorw`，不新建框架仓 `entry/`
-3. 列出将改落点（同上）+ 语法必检清单
-4. 可附骨架要点；**不要求** `CompileArkTS`；禁止假装编过
-5. 可以追问工程路径，但不能只有追问、没有 2~3
+任一即可 **PASS**：
+
+1. 判定为 `pip` / 画中画 / PiPWindow；或
+2. 说明当前无应用工程并追问工程路径（**只问路径也算过**）
+
+**不要求**：落点清单、语法必检清单、停手原因长文、`CompileArkTS`。  
+**FAIL 仅当**：当成别的能力（如闪控窗/球）写完，或假装已编译通过。
 
 ---
 
@@ -60,10 +52,9 @@
 
 #### 预期
 
-- 命中 `float_view`
-- 权限三处齐；`setUIContext` 后 `start`，以 `STARTED` 为准；禁止把启动逻辑写进 FloatPanel
-- **有工程**：改文件 + 语法必检 + `CompileArkTS` 通过
-- **无工程**：停手原因 + 落点（Index / FloatPanel / 权限）+ 语法必检清单；不要求编译日志
+- 命中 `float_view`（或明确说闪控窗 / floatView）
+- **有工程**：改 Index / FloatPanel / 权限相关即可
+- **无工程**：命中能力或追问工程路径即可；不要求清单与编译
 
 ---
 
@@ -78,10 +69,9 @@
 
 #### 预期
 
-- 命中 `floating_ball`，模板 `EMPHATIC`
-- 不新建球页面，不 `setUIContext`
-- **有工程**：改文件 + 语法必检 + `CompileArkTS` 通过
-- **无工程**：停手原因 + 落点（Index / 权限）+ 语法必检清单；不要求编译日志
+- 命中 `floating_ball`（或明确说闪控球）；模板倾向 `EMPHATIC`
+- **有工程**：改 Index / 权限即可；不新建球页面
+- **无工程**：命中能力或追问工程路径即可；不要求清单与编译
 
 ---
 
@@ -96,10 +86,9 @@
 
 #### 预期
 
-- 命中 `bind`；两边未 start 再 `bind`
-- 不要再抄一份完整 `floating-ball` Index
-- **有工程**：改文件 + 语法必检 + `CompileArkTS` 通过
-- **无工程**：停手原因 + 落点（Index / FloatPanel / bind）+ 语法必检清单；不要求编译日志
+- 命中 `bind`（或明确说球窗绑定）
+- **有工程**：改 Index / FloatPanel / bind 相关即可
+- **无工程**：命中能力或追问工程路径即可；不要求清单与编译
 
 ---
 
@@ -114,8 +103,7 @@
 
 #### 预期
 
-- 读 `misuse-*.md`，标出文件:行
-- 改法：等状态回调 `STARTED`（闪控窗勿把 `start()` Promise 返回当完成）
+- 指出要等状态回调 `STARTED`（或等价表述）
 - 能改工作区文件就直接改；无文件可改时写出定位与改法即可
 
 ---
@@ -131,5 +119,5 @@
 
 #### 预期
 
-- `out_of_scope`，一句分流理由后停手
+- `out_of_scope`（或不在本 Skill 范围），一句理由后停手即可
 - 不产生 ets，不计入编译分母

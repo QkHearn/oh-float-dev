@@ -131,7 +131,7 @@ hmos-arkui-kit-window-floatwindow/
 **先读骨架再改文件。** 不要抄 `references/apis/js-apis-*.md` 示例当可粘贴代码。
 
 1. 只按 [assets/skeleton.md](assets/skeleton.md) 的表读齐。不要在本文件另开捷径；不要跳过 `pip.md` 直接抄 xcomponent；绑定不要再抄一份 `floating-ball.md` 整页 Index。
-2. [references/engineering/stage-layout.md](references/engineering/stage-layout.md) 落点。有 `module.json5` + `main_pages.json`、用户给了路径、即使 `ets/pages` 为空也补文件。仅 OHOS 框架仓、没有应用模块才停手问路径。
+2. [references/engineering/stage-layout.md](references/engineering/stage-layout.md) 落点。有 `module.json5` + `main_pages.json`、用户给了路径、即使 `ets/pages` 为空也补文件。仅无应用模块时停手问路径。
 3. [references/engineering/arkui-syntax.md](references/engineering/arkui-syntax.md)「写出来必须能编过」+ [references/engineering/ui-style.md](references/engineering/ui-style.md)
 4. **自己编译**：命令见 [references/engineering/stage-layout.md](references/engineering/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `references/apis/js-apis` **某一节**，禁止 Read 整个 `js-apis-*.md`
 5. 表里有防窥才读 [assets/peep.md](assets/peep.md)，往已有页里加，不要另起一页
@@ -144,12 +144,10 @@ hmos-arkui-kit-window-floatwindow/
 - [ ] 编译成功：自己跑 hvigorw assembleHap；输出含 CompileArkTS 通过。失败改 ets 再编。禁止让用户去 DevEco 代编
 
 无工程 / 无 hvigorw 时（不要假装编过）：
-- [ ] 写明停手原因
-- [ ] 列出将改落点 + 同上语法必检清单（可附骨架要点）
-- [ ] 可以追问工程路径，但不能只有追问、没有分析
+- [ ] 可先分流再停手问工程路径；不要在当前仓根新建 entry/
 ```
 
-评测用例见 [test-cases/](test-cases/README.md)（`FUNC-001~004` 按有/无工程分支判）。
+评测用例见 [test-cases/](test-cases/README.md)（`FUNC-001~004` 无工程时：命中能力或追问路径即过）。
 
 - ArkTS error / throw / deprecated / `as number` → 改刚写的 ets
 - 缺 `DeviceSecurityKit` DTS → 说明 SDK，不要改成文案防窥

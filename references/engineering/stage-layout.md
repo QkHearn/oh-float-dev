@@ -75,11 +75,11 @@ Project/
 
 1. **已有应用工程且 `ets/pages/*.ets` 在**：按 [merge.md](../../assets/merge.md) 改现有文件。画中画按 [pip.md](../../assets/pip.md) 建可加载宿主 + `Page1`。闪控窗没有内容页才 **新建** `FloatPanel.ets` 并登记。闪控球不要新建球页。
 2. **用户给了应用路径，且已有 `module.json5` + `main_pages.json`，但 `ets/pages` 为空**：按骨架**补文件**，不要问路径。
-3. **找不到应用模块**：没有 `module.json5`（常见：工作区是 OHOS 源码仓、只有 WMS）。**停手问用户应用工程路径**。不要在当前仓根下新建 `entry/`，不要把 demo 写进框架目录。
+3. **找不到应用模块**：没有 `module.json5`（常见：工作区是 OHOS 源码仓、只有 WMS，或 CI 只挂 skill 仓）。**停手问用户应用工程路径**。不要在当前仓根下新建 `entry/`，不要把 demo 写进框架目录，不要假装 `CompileArkTS` 通过。
 4. **用户明确只要脚手架、且已给应用路径**：按上表在该路径 **创建** `entry/src/main/...`。只建页面 `.ets` + `main_pages.json` + 权限相关 JSON。不要生成 `oh-package.json5` / 工程级 `build-profile.json5` / 全量脚手架，除非用户明确要工程。
 5. 每处修改对应真实路径。不要只丢无路径代码块让用户自己贴。
 
-写完后**自己**在应用工程根打 HAP，编不过不算写完。交卷必须带 `CompileArkTS` 通过；不要让用户去 DevEco 点编译来验你刚写的代码。找不到 `module.json5` 或 `hvigorw`：写明停手原因，不要假装编过。
+写完后**自己**在应用工程根打 HAP，编不过不算写完。交卷必须带 `CompileArkTS` 通过；不要让用户去 DevEco 点编译来验你刚写的代码。找不到 `module.json5` 或 `hvigorw`：问路径即可，不要假装编过。
 
 ```text
 export PATH="<DevEco>/Contents/tools/node/bin:<DevEco>/Contents/tools/ohpm/bin:<DevEco>/Contents/tools/hvigor/bin:$PATH"

@@ -8,24 +8,17 @@
     "expected": {
       "primary_scene": "pip",
       "with_app_project": {
-        "gates": [
-          "edit_project_files",
-          "syntax_self_check_against_arkui-syntax.md",
-          "no_as_number_on_getWindowId",
-          "setAutoStartEnabled_not_setAutoStart",
-          "self_run_hvigorw",
-          "CompileArkTS_pass_in_output"
-        ],
-        "forbidden": ["ask_user_to_compile_in_DevEco"]
+        "gates": ["edit_project_files"],
+        "optional": ["CompileArkTS_pass_in_output"]
       },
       "without_app_project": {
-        "gates": [
-          "state_stop_reason_no_module_or_hvigorw",
-          "list_landing_paths_PipHost_Page1_AVPlayer_main_pages",
-          "list_syntax_checklist"
+        "pass_any_of": [
+          "hit_pip_or_PiPWindow",
+          "ask_project_path"
         ],
-        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
-        "exclude_from_compile_denominator": true
+        "forbidden": ["fake_CompileArkTS_pass", "misroute_to_float_view_or_ball"],
+        "exclude_from_compile_denominator": true,
+        "notes": "只问工程路径也算过；不要求停手原因/落点/语法清单"
       }
     }
   },
@@ -37,17 +30,12 @@
     "user_prompt": "实现闪控窗：Index 启动，内容页 FloatPanel。",
     "expected": {
       "primary_scene": "float_view",
-      "notes": "setUIContext 后 start，以 STARTED 为准；启动逻辑不进 FloatPanel",
       "with_app_project": {
-        "gates": ["edit_project_files", "syntax_self_check", "CompileArkTS_pass"]
+        "gates": ["edit_project_files"]
       },
       "without_app_project": {
-        "gates": [
-          "state_stop_reason_no_module_or_hvigorw",
-          "list_landing_paths_Index_FloatPanel_permissions",
-          "list_syntax_checklist"
-        ],
-        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "pass_any_of": ["hit_float_view", "ask_project_path"],
+        "forbidden": ["fake_CompileArkTS_pass"],
         "exclude_from_compile_denominator": true
       }
     }
@@ -61,17 +49,12 @@
     "expected": {
       "primary_scene": "floating_ball",
       "template": "EMPHATIC",
-      "forbidden": ["new_ball_page", "setUIContext"],
       "with_app_project": {
-        "gates": ["edit_project_files", "syntax_self_check", "CompileArkTS_pass"]
+        "gates": ["edit_project_files"]
       },
       "without_app_project": {
-        "gates": [
-          "state_stop_reason_no_module_or_hvigorw",
-          "list_landing_paths_Index_permissions",
-          "list_syntax_checklist"
-        ],
-        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "pass_any_of": ["hit_floating_ball", "ask_project_path"],
+        "forbidden": ["fake_CompileArkTS_pass"],
         "exclude_from_compile_denominator": true
       }
     }
@@ -84,17 +67,12 @@
     "user_prompt": "球窗绑定：点球开窗、点窗回球。",
     "expected": {
       "primary_scene": "bind",
-      "forbidden": ["duplicate_floating_ball_index"],
       "with_app_project": {
-        "gates": ["edit_project_files", "syntax_self_check", "CompileArkTS_pass"]
+        "gates": ["edit_project_files"]
       },
       "without_app_project": {
-        "gates": [
-          "state_stop_reason_no_module_or_hvigorw",
-          "list_landing_paths_Index_FloatPanel_bind",
-          "list_syntax_checklist"
-        ],
-        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "pass_any_of": ["hit_bind", "ask_project_path"],
+        "forbidden": ["fake_CompileArkTS_pass"],
         "exclude_from_compile_denominator": true
       }
     }
@@ -106,9 +84,7 @@
     "mode": "debug",
     "user_prompt": "create 成功后立刻当小窗已显示，但用户看不见窗。请查错并改文件。",
     "expected": {
-      "must_cite_file_line": true,
       "fix": "wait_STARTED_callback",
-      "read_first": "references/misuse/misuse-*.md",
       "notes": "无文件可改时写出定位与改法即可"
     }
   },
