@@ -2,12 +2,12 @@
 
 **以本目录接口落盘为日常契约。** 接口 / 查错 / 答接口时按下面「文档分类」打开对应文件，不要通读本目录，也不要把本仓 `docs/zh-cn` / DTS 当权威。官网现行正文只在用户要求刷新且抓到完整正文时覆盖本目录。
 
-**写程序不要用本索引当骨架目录。** 骨架只走 [../asset/skeleton.md](../asset/skeleton.md)。
+**写程序不要用本索引当骨架目录。** 骨架只走 [../assets/skeleton.md](../assets/skeleton.md)。
 
 冲突：刷新成功的官网正文 > 本目录落盘 > `misuse/misuse-*.md`。
 
 ```text
-reference/
+references/
 ├── index.md                       本索引
 ├── requirement-review.md          需求评审稿
 ├── apis/                          接口全文（只 Grep 节，禁止整文件 Read）
@@ -56,8 +56,8 @@ reference/
 
 | 能力 | 已落盘 | 未落盘 / 非全文 |
 |------|--------|-----------------|
-| 画中画 | [js-apis-pipWindow.md](apis/js-apis-pipWindow.md) 接口全文 + [guide-pip.md](guides/guide-pip.md) 步骤摘要 | `guide-pip.md` 不是官网全文。写程序以指导摘要 + `asset/pip.md` 为准，日常不打开官网 |
-| 闪控球 | [js-apis-floatingBall.md](apis/js-apis-floatingBall.md) 接口全文 | 无独立 `guide-*.md`。开发步骤以接口文档 + `asset/floating-ball.md` 为准 |
+| 画中画 | [js-apis-pipWindow.md](apis/js-apis-pipWindow.md) 接口全文 + [guide-pip.md](guides/guide-pip.md) 步骤摘要 | `guide-pip.md` 不是官网全文。写程序以指导摘要 + `assets/pip.md` 为准，日常不打开官网 |
+| 闪控球 | [js-apis-floatingBall.md](apis/js-apis-floatingBall.md) 接口全文 | 无独立 `guide-*.md`。开发步骤以接口文档 + `assets/floating-ball.md` 为准 |
 | 闪控窗 | 接口全文 + [guide-float-view.md](guides/guide-float-view.md) | `guide-float-view.md` 是要点摘要，不是官网指导全文。官网：https://developer.huawei.com/consumer/cn/doc/HarmonyOS-Guides/float-view-guide |
 | 防窥 | [guide-dlp-anti-peep.md](guides/guide-dlp-anti-peep.md) | 同样是要点摘要。官网：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-dlpantipeep |
 | Stage 工程 / ArkUI 语法 | [stage-layout.md](engineering/stage-layout.md)、[arkui-syntax.md](engineering/arkui-syntax.md) | 摘要，不是入门全文。装饰器专章不落盘 |

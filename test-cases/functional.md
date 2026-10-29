@@ -9,7 +9,7 @@
 > | **有工程**：工作区有可改 Stage 应用（`module.json5` + `hvigorw`） | 改文件 + 语法自检落笔 + 自己跑 `hvigorw`，输出含 `CompileArkTS` 通过 |
 > | **无工程**：仅 skill 仓 / 无 `module.json5` / 无 `hvigorw`（CI 常见） | 命中能力 + **写明停手原因** + **落点清单** + **语法必检清单**；**不要求** `CompileArkTS`；禁止假装编过；禁止只问路径无分析 |
 
-语法必检清单（有/无工程都要在输出里出现，对照 `reference/engineering/arkui-syntax.md`）：
+语法必检清单（有/无工程都要在输出里出现，对照 `references/engineering/arkui-syntax.md`）：
 
 - 会抛 API：`try/catch` + `BusinessError`
 - `getWindowId()`：`!== undefined` 再传，禁止 `as number`

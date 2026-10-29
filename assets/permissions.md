@@ -1,6 +1,6 @@
 # 权限（窗 / 球 / 防窥）
 
-纯 PiP 可跳过本文件。资料：[declare-permissions.md](../reference/permissions/declare-permissions.md)、[declare-permissions-in-acl.md](../reference/permissions/declare-permissions-in-acl.md)、[restricted-permissions-float.md](../reference/permissions/restricted-permissions-float.md)。
+纯 PiP 可跳过本文件。资料：[declare-permissions.md](../references/permissions/declare-permissions.md)、[declare-permissions-in-acl.md](../references/permissions/declare-permissions-in-acl.md)、[restricted-permissions-float.md](../references/permissions/restricted-permissions-float.md)。
 
 按能力**裁剪**，不要三条都抄进只用其中一种的工程：
 
@@ -46,7 +46,7 @@
 
 **3. 运行时** — 只对 **user_grant 的 `FLOAT_VIEW`** 弹窗。`USE_FLOAT_BALL`、`DLP_GET_HIDE_STATUS` 是 system_grant，声明+ACL 后安装即授，不要弹窗。
 
-**4. 防窥开关（不是权限弹窗）** — ACL ≠ 系统「防窥保护」。原因见 [guide-dlp-anti-peep.md](../reference/guides/guide-dlp-anti-peep.md)，代码见 [peep.md](peep.md)。
+**4. 防窥开关（不是权限弹窗）** — ACL ≠ 系统「防窥保护」。原因见 [guide-dlp-anti-peep.md](../references/guides/guide-dlp-anti-peep.md)，代码见 [peep.md](peep.md)。
 
 ```ts
 import { abilityAccessCtrl, common, Permissions } from '@kit.AbilityKit';

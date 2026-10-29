@@ -1,6 +1,6 @@
 # 窗 + 球绑定（本地）
 
-细节：[misuse-float-view.md](../reference/misuse/misuse-float-view.md) 绑定节。两边都 `create` 且**都未 start**，再 bind，再 start 其中一个。权限：`FLOAT_VIEW` 弹窗 + `USE_FLOAT_BALL` 不弹窗（[permissions.md](permissions.md)）。
+细节：[misuse-float-view.md](../references/misuse/misuse-float-view.md) 绑定节。两边都 `create` 且**都未 start**，再 bind，再 start 其中一个。权限：`FLOAT_VIEW` 弹窗 + `USE_FLOAT_BALL` 不弹窗（[permissions.md](permissions.md)）。
 
 **怎么拼（只出一套 Index）：**
 

@@ -2,7 +2,7 @@
 
 只做贴边球时抄本文件。**绑定不要抄这一份**，改走 [bind.md](bind.md)。
 
-签名：[js-apis-floatingBall.md](../reference/apis/js-apis-floatingBall.md)。`USE_FLOAT_BALL` 只声明+ACL，不要弹窗。系统画球，不要新建球页、不要 `setUIContext`。
+签名：[js-apis-floatingBall.md](../references/apis/js-apis-floatingBall.md)。`USE_FLOAT_BALL` 只声明+ACL，不要弹窗。系统画球，不要新建球页、不要 `setUIContext`。
 
 `create` 只做一次。等 `STARTED` 才算起来。不要在 `aboutToDisappear` 里 `stopFloatingBall`。
 

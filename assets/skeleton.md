@@ -1,6 +1,6 @@
 # 可抄骨架（本地）
 
-签名以 [reference/](../reference/index.md) 落盘为准。写程序只按下表**对应那一行**读齐，不要通读本目录，不要抄 `js-apis` 示例。
+签名以 [references/](../references/index.md) 落盘为准。写程序只按下表**对应那一行**读齐，不要通读本目录，不要抄 `js-apis` 示例。
 
 先保证页面能加载：`main_pages.json` 与加载 API 字符串一致。画中画枚举按 [pip.md](pip.md) 三列表改，不要只改 `tpl`。播放器落 `ets/model/AVPlayer.ets`。
 
@@ -22,4 +22,4 @@
 4. 若画中画：同一 controller + `create(config)` 无第二参；进 PiP 不摘组件；`controlGroups` / `controlEvent` 与 `tpl` 同族
 5. 若绑定：`floatView.bind`，听 `IN_FLOATING_BALL`；只要一套 Index
 6. 若防窥：开关、回调、蒙层见 [peep.md](peep.md)，往已有页里加
-7. 能编过：会抛 API 要 try/catch；见 [arkui-syntax.md](../reference/engineering/arkui-syntax.md)「写出来必须能编过」
+7. 能编过：会抛 API 要 try/catch；见 [arkui-syntax.md](../references/engineering/arkui-syntax.md)「写出来必须能编过」

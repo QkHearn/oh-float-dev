@@ -108,7 +108,7 @@
     "expected": {
       "must_cite_file_line": true,
       "fix": "wait_STARTED_callback",
-      "read_first": "reference/misuse/misuse-*.md",
+      "read_first": "references/misuse/misuse-*.md",
       "notes": "无文件可改时写出定位与改法即可"
     }
   },

@@ -37,7 +37,7 @@ bind 时声明+ACL 再加 `USE_FLOAT_BALL`（system_grant，**不弹窗**）。�
 
 ## 防窥组合
 
-`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉系统蒙层，开关和抄写见 [peep.md](../../asset/peep.md)。`getWindowId()` 先判空，不要 `as number`。不要用 `getWindowProperties().windowId`，不要改文案当防窥。系统提醒 ≠ 蒙层。
+`FloatViewController` 没有防窥 API。用 `dlpAntiPeep` 拉系统蒙层，开关和抄写见 [peep.md](../../assets/peep.md)。`getWindowId()` 先判空，不要 `as number`。不要用 `getWindowProperties().windowId`，不要改文案当防窥。系统提醒 ≠ 蒙层。
 
 ## 错误码（应用侧）
 
