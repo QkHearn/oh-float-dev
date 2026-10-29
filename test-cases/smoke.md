@@ -1,132 +1,51 @@
-## 冒烟测试用例（分流问答）
+## 冒烟测试用例
 
-> 验证分流表能否正确命中画中画 / 闪控窗 / 闪控球 / 绑定 / 防窥 / 范围外。只判口头分流，不要求写代码。
-
----
-
-### SMOKE-001 画中画（视频播放）
-
-**skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
-
-#### 输入
-
-给视频播放页加画中画，退到后台还能以小窗继续播。
-
-#### 预期
-
-- 命中：`pip`（`PiPWindow`，默认 XComponent，模板 `VIDEO_PLAY`）
-- 禁止：`float_view`、`floating_ball`、`TYPE_FLOAT`、`createSubWindow`
+> 路由问答。输入已要求只输出一行能力 id，避免子进程读文件超时。
 
 ---
 
-### SMOKE-002 画中画（会议）
+### 测试用例：SMOKE-001
 
 **skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
+**类型**：smoke（路由验证）
 
 #### 输入
 
-视频会议场景要进系统画中画小窗。
+不要读任何文件。只输出一行：`能力=pip` 或 `能力=float_view` 或 `能力=floating_ball` 或 `能力=out_of_scope`。问题：视频播放页要系统画中画小窗继续播，选哪个？
 
-#### 预期
+#### 预期输出
 
-- 命中：`pip`，模板 `VIDEO_MEETING`
-- `controlGroups` 与 `controlEvent` 同族
+**应命中场景**：pip  
+**禁止命中场景**：TYPE_FLOAT, createSubWindow
 
 ---
 
-### SMOKE-003 闪控窗
+### 测试用例：SMOKE-002
 
 **skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
+**类型**：smoke（路由验证）
 
 #### 输入
 
-应用退后台后还要继续展示自定义页面内容的小窗。
+不要读任何文件。只输出一行：`能力=pip` 或 `能力=float_view` 或 `能力=floating_ball` 或 `能力=out_of_scope`。问题：退后台还要展示自定义页面内容的小窗（不要系统 PiP 控制条），选哪个？
 
-#### 预期
+#### 预期输出
 
-- 命中：`float_view`
-- 禁止：用 PiP 冒充（不要系统 PiP 控制条）
+**应命中场景**：float_view  
+**禁止命中场景**：TYPE_FLOAT, createSubWindow
 
 ---
 
-### SMOKE-004 闪控球
+### 测试用例：SMOKE-003
 
 **skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
+**类型**：smoke（路由验证）
 
 #### 输入
 
-做一个贴边小球，不要自定义 UI。未指定模板或样式。
+不要读任何文件。只输出一行：`能力=pip` 或 `能力=float_view` 或 `能力=floating_ball` 或 `能力=out_of_scope`。问题：贴边小球、不要自定义 UI，选哪个？
 
-#### 预期
+#### 预期输出
 
-- 命中：`floating_ball`
-- 模板：未说样式时默认 `EMPHATIC`（不要选 `NORMAL` / `STATIC` / `SIMPLE`）
-- 禁止：给球新建页面 / `setUIContext`
-
----
-
-### SMOKE-005 绑定
-
-**skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
-
-#### 输入
-
-点小球展开闪控窗，点窗再缩回球。
-
-#### 预期
-
-- 命中：`bind`（`floatView.bind`）
-- 读骨架：float-view Index + bind，不要再抄整份 floating-ball Index
-
----
-
-### SMOKE-006 闪控窗 + 防窥
-
-**skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
-
-#### 输入
-
-闪控窗一直展示，被窥视时要系统蒙层。
-
-#### 预期
-
-- 命中：`float_view+peep`
-- 权限含 `DLP_GET_HIDE_STATUS`；`HIDE` 走 `showSystemMaskLayer`
-
----
-
-### SMOKE-007 范围外（TYPE_FLOAT）
-
-**skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
-
-#### 输入
-
-用 `TYPE_FLOAT` 做个全局悬浮窗。
-
-#### 预期
-
-- 命中：`out_of_scope`
-- 明确说不在本 Skill 范围后停手，不写代码
-
----
-
-### SMOKE-008 范围外（createSubWindow）
-
-**skill**：hmos-arkui-kit-window-floatwindow  
-**类型**：smoke（路由）
-
-#### 输入
-
-帮我 `createSubWindow` 做一个子窗口当画中画。
-
-#### 预期
-
-- 命中：`out_of_scope`
-- 说明应用辅助窗应走 PiP / floatView / floatingBall，然后停手
+**应命中场景**：floating_ball  
+**禁止命中场景**：TYPE_FLOAT, createSubWindow

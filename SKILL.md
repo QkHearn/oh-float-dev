@@ -45,12 +45,14 @@ hmos-arkui-kit-window-floatwindow/
 
 一次请求可叠加。**先分流，再动手。**
 
+**分流 / 纯问答（含评测）：** 先用一行给出能力 id（`pip` / `float_view` / `floating_ball` / `bind` / `out_of_scope`），再展开。用户说「不要读任何文件」时：**禁止 Read** `assets/` / `references/`，只凭本文件分流表作答。
+
 ## 工作流
 
 ```text
 进度:
 - [ ] 1. 判定能力：pip | float_view | floating_ball | bind | float_view+peep | pip+bind | pip+bind+peep | out_of_scope
-- [ ] 2. 按模式读文件（见下表），不要把 references/ 整目录读完
+- [ ] 2. 按模式读文件（见下表），不要把 references/ 整目录读完；纯分流问答可跳过本步
 - [ ] 3. 按模式产出；写程序只抄 assets/，不要抄 js-apis 示例
 - [ ] 4. 写程序改了 ets / json5：先做语法自检（arkui-syntax「写出来必须能编过」），再自己跑 hvigorw；交卷必须带 CompileArkTS 通过。无工程 / 无 hvigorw 则写明停手原因，禁止让用户去 DevEco 代编
 ```
