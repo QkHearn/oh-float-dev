@@ -1,0 +1,70 @@
+references/guides/window-type-overview.md
+  s_d280b0efbbc15d::t_ea78d085510710 10-30
+references/permissions/declare-permissions.md
+  s_d280b0efbbc15d::t_79f048c43ca598 102
+SKILL.md
+  s_d280b0efbbc15d::t_e37d28425b5d19 15,22,26,53-54,60-64,77,94,114,118,131,133-137,159,163,176
+assets/bind.md
+  s_d280b0efbbc15d::t_e508c1cf39249b 3
+assets/float-view.md
+  s_d280b0efbbc15d::t_6958c749572273 3
+assets/floating-ball.md
+  s_d280b0efbbc15d::t_505a57db6b2481 5
+assets/peep.md
+  s_d280b0efbbc15d::t_b809dd1b24d482 5,11
+assets/permissions.md
+  s_d280b0efbbc15d::t_33c19a3c53e6a9 3,49
+assets/pip-xcomponent.md
+  s_d280b0efbbc15d::t_0cc4b24e62d7d0 3
+assets/pip.md
+  s_d280b0efbbc15d::t_67d5350b6cf6c8 3
+assets/skeleton.md
+  s_d280b0efbbc15d::t_e5d3d0a1b96110 3,25
+references/engineering/arkui-syntax.md
+  s_d280b0efbbc15d::t_07b2d83844f3aa 57
+references/engineering/stage-layout.md
+  s_d280b0efbbc15d::t_32b1248a7d7979 76
+references/engineering/ui-style.md
+  s_d280b0efbbc15d::t_a302331bd8c4b1 76
+references/guides/guide-float-view.md
+  s_d280b0efbbc15d::t_d3f082a747b0fb 50
+references/guides/guide-pip.md
+  s_d280b0efbbc15d::t_ab8acddd4717a2 11,29,97,104
+references/index.md
+  s_d280b0efbbc15d::t_23b4856c9974a7 5,10,59-60
+references/misuse/misuse-float-view.md
+  s_d280b0efbbc15d::t_8b32904bc3218d 40
+references/misuse/misuse-pip.md
+  s_d280b0efbbc15d::t_5b9efba009a242 3,28
+test-cases/functional.md
+  s_d280b0efbbc15d::t_1d601c9daa7f2b 12
+test-cases/scene-functional/scene-functional-floatwindow.json
+  s_d280b0efbbc15d::t_2bfbc4ddb6f632 111
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.7",
+  "base_commit_sha": "93deec50027b0e925ce87472fffdb56775cd5fef",
+  "prompts": {},
+  "humans": {
+    "h_5a953564e698df": {
+      "author": "Hearn <liuqiankun11@huawei.com>"
+    }
+  },
+  "sessions": {
+    "s_d280b0efbbc15d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8efcac04-e24e-46b2-b701-79ece0aa1c78",
+        "model": "default"
+      },
+      "human_author": "Hearn <liuqiankun11@huawei.com>",
+      "custom_attributes": {
+        "stats_model_totals": "{\"default\":{\"additions\":4,\"deletions\":4}}",
+        "stats_total_additions": "4",
+        "stats_total_deletions": "4",
+        "stats_turn_models": "{\"t_79f048c43ca598\":\"default\",\"t_ea78d085510710\":\"default\"}"
+      }
+    }
+  }
+}
