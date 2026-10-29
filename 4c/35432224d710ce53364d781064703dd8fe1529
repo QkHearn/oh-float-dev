@@ -1,0 +1,42 @@
+test-cases/smoke.md
+  s_d280b0efbbc15d::t_20b4210f352084 1-131
+test-cases/functional.md
+  s_d280b0efbbc15d::t_144bda69234992 1-115
+test-cases/smoke/smoke-floatwindow.json
+  s_d280b0efbbc15d::t_4184a442ffc38c 1-87
+test-cases/scene-functional/scene-functional-floatwindow.json
+  s_d280b0efbbc15d::t_29674a281dbe75 1-81
+test-cases/README.md
+  s_d280b0efbbc15d::t_a0368ca4a8e381 1-35
+SKILL.md
+  s_d280b0efbbc15d::t_40163393d2d0bc 139-148
+  s_d280b0efbbc15d::t_08f452564f55db 55
+  s_d280b0efbbc15d::t_59b0d9ac4a08c0 24-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.7",
+  "base_commit_sha": "4c35432224d710ce53364d781064703dd8fe1529",
+  "prompts": {},
+  "humans": {
+    "h_5a953564e698df": {
+      "author": "Hearn <liuqiankun11@huawei.com>"
+    }
+  },
+  "sessions": {
+    "s_d280b0efbbc15d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8efcac04-e24e-46b2-b701-79ece0aa1c78",
+        "model": "default"
+      },
+      "human_author": "Hearn <liuqiankun11@huawei.com>",
+      "custom_attributes": {
+        "stats_model_totals": "{\"default\":{\"additions\":462,\"deletions\":1}}",
+        "stats_total_additions": "462",
+        "stats_total_deletions": "1",
+        "stats_turn_models": "{\"t_08f452564f55db\":\"default\",\"t_144bda69234992\":\"default\",\"t_20b4210f352084\":\"default\",\"t_29674a281dbe75\":\"default\",\"t_40163393d2d0bc\":\"default\",\"t_4184a442ffc38c\":\"default\",\"t_59b0d9ac4a08c0\":\"default\",\"t_a0368ca4a8e381\":\"default\"}"
+      }
+    }
+  }
+}
