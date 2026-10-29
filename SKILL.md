@@ -147,7 +147,7 @@ hmos-arkui-kit-window-floatwindow/
 - [ ] 可先分流再停手问工程路径；不要在当前仓根新建 entry/
 ```
 
-评测用例见 [test-cases/](test-cases/README.md)（`FUNC-001~004` 无工程时：命中能力或追问路径即过）。
+评测用例见 [test-cases/](test-cases/README.md)（冒烟 + 功能均聚焦问答分流/答疑，不卡编译）。
 
 - ArkTS error / throw / deprecated / `as number` → 改刚写的 ets
 - 缺 `DeviceSecurityKit` DTS → 说明 SDK，不要改成文案防窥

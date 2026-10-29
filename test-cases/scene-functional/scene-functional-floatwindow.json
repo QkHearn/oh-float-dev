@@ -2,102 +2,70 @@
   {
     "case_id": "FW-FUNC-001",
     "layer": "scene-functional",
-    "title": "写程序交卷门禁：画中画（有/无工程分支）",
-    "mode": "write",
-    "user_prompt": "在当前应用工程里实现视频播放画中画（默认 XComponent）。",
+    "title": "问答：画中画还是闪控窗",
+    "mode": "qa",
+    "user_prompt": "视频播放页要退后台继续以系统小窗播，该用画中画还是闪控窗？默认怎么做？",
     "expected": {
       "primary_scene": "pip",
-      "with_app_project": {
-        "gates": ["edit_project_files"],
-        "optional": ["CompileArkTS_pass_in_output"]
-      },
-      "without_app_project": {
-        "pass_any_of": [
-          "hit_pip_or_PiPWindow",
-          "ask_project_path"
-        ],
-        "forbidden": ["fake_CompileArkTS_pass", "misroute_to_float_view_or_ball"],
-        "exclude_from_compile_denominator": true,
-        "notes": "只问工程路径也算过；不要求停手原因/落点/语法清单"
-      }
+      "must_mention_any": ["PiPWindow", "画中画", "pip"],
+      "forbidden": ["require_project_path", "CompileArkTS", "edit_ets_required"]
     }
   },
   {
     "case_id": "FW-FUNC-002",
     "layer": "scene-functional",
-    "title": "闪控窗写程序（有/无工程分支）",
-    "mode": "write",
-    "user_prompt": "实现闪控窗：Index 启动，内容页 FloatPanel。",
+    "title": "问答：闪控窗何时算显示",
+    "mode": "qa",
+    "user_prompt": "闪控窗怎么启动才算真正显示？create 成功算不算已经出来了？",
     "expected": {
       "primary_scene": "float_view",
-      "with_app_project": {
-        "gates": ["edit_project_files"]
-      },
-      "without_app_project": {
-        "pass_any_of": ["hit_float_view", "ask_project_path"],
-        "forbidden": ["fake_CompileArkTS_pass"],
-        "exclude_from_compile_denominator": true
-      }
+      "must_mention_any": ["STARTED", "setUIContext", "create 不是显示"],
+      "notes": "start Promise 返回不等于已显示"
     }
   },
   {
     "case_id": "FW-FUNC-003",
     "layer": "scene-functional",
-    "title": "闪控球写程序（有/无工程分支）",
-    "mode": "write",
-    "user_prompt": "在 Index 上做闪控球，模板用强调样式。",
+    "title": "问答：闪控球默认模板",
+    "mode": "qa",
+    "user_prompt": "要做贴边小球，用户没说样式，模板选哪个？能不能给球单独建页面？",
     "expected": {
       "primary_scene": "floating_ball",
       "template": "EMPHATIC",
-      "with_app_project": {
-        "gates": ["edit_project_files"]
-      },
-      "without_app_project": {
-        "pass_any_of": ["hit_floating_ball", "ask_project_path"],
-        "forbidden": ["fake_CompileArkTS_pass"],
-        "exclude_from_compile_denominator": true
-      }
+      "forbidden": ["new_ball_page", "setUIContext"]
     }
   },
   {
     "case_id": "FW-FUNC-004",
     "layer": "scene-functional",
-    "title": "绑定写程序（有/无工程分支）",
-    "mode": "write",
-    "user_prompt": "球窗绑定：点球开窗、点窗回球。",
+    "title": "问答：球窗绑定注意点",
+    "mode": "qa",
+    "user_prompt": "点球开闪控窗、点窗回球，绑定时有什么注意点？",
     "expected": {
       "primary_scene": "bind",
-      "with_app_project": {
-        "gates": ["edit_project_files"]
-      },
-      "without_app_project": {
-        "pass_any_of": ["hit_bind", "ask_project_path"],
-        "forbidden": ["fake_CompileArkTS_pass"],
-        "exclude_from_compile_denominator": true
-      }
+      "must_mention_any": ["bind", "未 start 再 bind", "两边未 start"]
     }
   },
   {
     "case_id": "FW-FUNC-005",
     "layer": "scene-functional",
-    "title": "查错：create 成功不当已显示",
-    "mode": "debug",
-    "user_prompt": "create 成功后立刻当小窗已显示，但用户看不见窗。请查错并改文件。",
+    "title": "问答：create 成功看不见窗",
+    "mode": "qa",
+    "user_prompt": "代码里 create 成功后立刻当小窗已显示，用户反馈看不见窗，原因是什么？",
     "expected": {
       "fix": "wait_STARTED_callback",
-      "notes": "无文件可改时写出定位与改法即可"
+      "notes": "口头说明即可，不要求改文件"
     }
   },
   {
     "case_id": "FW-FUNC-006",
     "layer": "scene-functional",
-    "title": "范围外停手不计编译",
-    "mode": "route",
-    "user_prompt": "用子窗口 createSubWindow 做悬浮小窗。",
+    "title": "问答：createSubWindow 范围外",
+    "mode": "qa",
+    "user_prompt": "用子窗口 createSubWindow 做悬浮小窗可以吗？",
     "expected": {
       "primary_scene": "out_of_scope",
-      "must_stop": true,
-      "exclude_from_compile_denominator": true
+      "must_stop": true
     }
   }
 ]
