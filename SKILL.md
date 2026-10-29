@@ -21,6 +21,8 @@ hmos-arkui-kit-window-floatwindow/
 ├── SKILL.md                      分流、模式、铁律（本文件）
 ├── asset/                        可抄骨架；写程序只走这里
 │   └── skeleton.md
+├── test-cases/                   分流冒烟 + 写程序功能评测
+│   └── README.md
 └── reference/                    官网落盘与评审；按子目录打开，不要通读
     ├── index.md                  七类索引
     ├── requirement-review.md     需求评审稿
@@ -50,7 +52,7 @@ hmos-arkui-kit-window-floatwindow/
 - [ ] 1. 判定能力：pip | float_view | floating_ball | bind | float_view+peep | pip+bind | pip+bind+peep | out_of_scope
 - [ ] 2. 按模式读文件（见下表），不要把 reference/ 整目录读完
 - [ ] 3. 按模式产出；写程序只抄 asset/，不要抄 js-apis 示例
-- [ ] 4. 改了 ets / json5：自己跑 hvigorw；交卷必须带 CompileArkTS 通过。无工程 / 无 hvigorw 则写明停手原因，禁止让用户去 DevEco 代编
+- [ ] 4. 写程序改了 ets / json5：先做语法自检（arkui-syntax「写出来必须能编过」），再自己跑 hvigorw；交卷必须带 CompileArkTS 通过。无工程 / 无 hvigorw 则写明停手原因，禁止让用户去 DevEco 代编
 ```
 
 | 模式 | 读什么 |
@@ -133,6 +135,16 @@ hmos-arkui-kit-window-floatwindow/
 3. [reference/engineering/arkui-syntax.md](reference/engineering/arkui-syntax.md)「写出来必须能编过」+ [reference/engineering/ui-style.md](reference/engineering/ui-style.md)
 4. **自己编译**：命令见 [reference/engineering/stage-layout.md](reference/engineering/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `reference/apis/js-apis` **某一节**，禁止 Read 整个 `js-apis-*.md`
 5. 表里有防窥才读 [asset/peep.md](asset/peep.md)，往已有页里加，不要另起一页
+
+**交卷前必检（写程序缺一不可）：**
+
+```text
+- [ ] 语法规范：对照 arkui-syntax「写出来必须能编过」——try/catch+BusinessError；getWindowId 禁止 as number；PiP 只用 setAutoStartEnabled；XComponent 用 Options 形态；无 deprecated 顶层 router
+- [ ] 编译成功：自己跑 hvigorw assembleHap；输出含 CompileArkTS 通过。失败改 ets 再编。禁止让用户去 DevEco 代编
+- [ ] 无工程 / 无 hvigorw：写明停手原因，不要假装编过
+```
+
+评测用例见 [test-cases/](test-cases/README.md)（`FUNC-001` 专测这两项门禁）。
 
 - ArkTS error / throw / deprecated / `as number` → 改刚写的 ets
 - 缺 `DeviceSecurityKit` DTS → 说明 SDK，不要改成文案防窥

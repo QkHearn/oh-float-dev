@@ -1,0 +1,87 @@
+[
+  {
+    "case_id": "FW-SMOKE-001",
+    "layer": "smoke",
+    "title": "冒烟：画中画视频播放分流",
+    "user_prompt": "给视频播放页加画中画，退到后台还能以小窗继续播。",
+    "expected": {
+      "primary_scene": "pip",
+      "module": "PiPWindow",
+      "template": "VIDEO_PLAY",
+      "forbidden": ["float_view", "floating_ball", "TYPE_FLOAT", "createSubWindow"]
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-002",
+    "layer": "smoke",
+    "title": "冒烟：画中画会议模板",
+    "user_prompt": "视频会议场景要进系统画中画小窗。",
+    "expected": {
+      "primary_scene": "pip",
+      "template": "VIDEO_MEETING",
+      "notes": "controlGroups 与 controlEvent 同族"
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-003",
+    "layer": "smoke",
+    "title": "冒烟：闪控窗分流",
+    "user_prompt": "应用退后台后还要继续展示自定义页面内容的小窗。",
+    "expected": {
+      "primary_scene": "float_view",
+      "forbidden": ["pip_as_custom_page"]
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-004",
+    "layer": "smoke",
+    "title": "冒烟：闪控球分流",
+    "user_prompt": "做一个贴边小球，只显示标题和进度，不要自定义 UI。",
+    "expected": {
+      "primary_scene": "floating_ball",
+      "template": "EMPHATIC",
+      "forbidden": ["new_ball_page", "setUIContext"]
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-005",
+    "layer": "smoke",
+    "title": "冒烟：球窗绑定分流",
+    "user_prompt": "点小球展开闪控窗，点窗再缩回球。",
+    "expected": {
+      "primary_scene": "bind",
+      "module": "floatView.bind"
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-006",
+    "layer": "smoke",
+    "title": "冒烟：闪控窗+防窥分流",
+    "user_prompt": "闪控窗一直展示，被窥视时要系统蒙层。",
+    "expected": {
+      "primary_scene": "float_view+peep",
+      "permission": "DLP_GET_HIDE_STATUS",
+      "hide_path": "showSystemMaskLayer"
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-007",
+    "layer": "smoke",
+    "title": "冒烟：TYPE_FLOAT 范围外",
+    "user_prompt": "用 TYPE_FLOAT 做个全局悬浮窗。",
+    "expected": {
+      "primary_scene": "out_of_scope",
+      "must_stop": true
+    }
+  },
+  {
+    "case_id": "FW-SMOKE-008",
+    "layer": "smoke",
+    "title": "冒烟：createSubWindow 范围外",
+    "user_prompt": "帮我 createSubWindow 做一个子窗口当画中画。",
+    "expected": {
+      "primary_scene": "out_of_scope",
+      "must_stop": true
+    }
+  }
+]

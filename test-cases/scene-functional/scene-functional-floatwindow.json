@@ -1,0 +1,81 @@
+[
+  {
+    "case_id": "FW-FUNC-001",
+    "layer": "scene-functional",
+    "title": "写程序交卷门禁：语法自检 + CompileArkTS",
+    "mode": "write",
+    "user_prompt": "在当前应用工程里实现视频播放画中画（默认 XComponent）。",
+    "expected": {
+      "primary_scene": "pip",
+      "gates": [
+        "syntax_self_check_against_arkui-syntax.md",
+        "no_as_number_on_getWindowId",
+        "setAutoStartEnabled_not_setAutoStart",
+        "self_run_hvigorw",
+        "CompileArkTS_pass_in_output"
+      ],
+      "forbidden": ["ask_user_to_compile_in_DevEco"]
+    }
+  },
+  {
+    "case_id": "FW-FUNC-002",
+    "layer": "scene-functional",
+    "title": "闪控窗写程序 + 编译门禁",
+    "mode": "write",
+    "user_prompt": "实现闪控窗：Index 启动，内容页 FloatPanel。",
+    "expected": {
+      "primary_scene": "float_view",
+      "gates": ["syntax_self_check", "CompileArkTS_pass"],
+      "notes": "setUIContext 后 start，以 STARTED 为准"
+    }
+  },
+  {
+    "case_id": "FW-FUNC-003",
+    "layer": "scene-functional",
+    "title": "闪控球写程序 + 编译门禁",
+    "mode": "write",
+    "user_prompt": "在 Index 上做闪控球，模板用强调样式。",
+    "expected": {
+      "primary_scene": "floating_ball",
+      "template": "EMPHATIC",
+      "gates": ["syntax_self_check", "CompileArkTS_pass"],
+      "forbidden": ["new_ball_page"]
+    }
+  },
+  {
+    "case_id": "FW-FUNC-004",
+    "layer": "scene-functional",
+    "title": "绑定写程序 + 编译门禁",
+    "mode": "write",
+    "user_prompt": "球窗绑定：点球开窗、点窗回球。",
+    "expected": {
+      "primary_scene": "bind",
+      "gates": ["syntax_self_check", "CompileArkTS_pass"],
+      "forbidden": ["duplicate_floating_ball_index"]
+    }
+  },
+  {
+    "case_id": "FW-FUNC-005",
+    "layer": "scene-functional",
+    "title": "查错：create 成功不当已显示",
+    "mode": "debug",
+    "user_prompt": "create 成功后立刻当小窗已显示，但用户看不见窗。请查错并改文件。",
+    "expected": {
+      "must_cite_file_line": true,
+      "fix": "wait_STARTED_callback",
+      "read_first": "reference/misuse/misuse-*.md"
+    }
+  },
+  {
+    "case_id": "FW-FUNC-006",
+    "layer": "scene-functional",
+    "title": "范围外停手不计编译",
+    "mode": "route",
+    "user_prompt": "用子窗口 createSubWindow 做悬浮小窗。",
+    "expected": {
+      "primary_scene": "out_of_scope",
+      "must_stop": true,
+      "exclude_from_compile_denominator": true
+    }
+  }
+]
