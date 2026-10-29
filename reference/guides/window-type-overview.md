@@ -3,13 +3,6 @@
 > Skill 落盘。权威：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-type-overview  
 > 刷新：用户要求同步官网时 WebFetch 该 URL 覆盖本文；空壳则保持不动。
 
-<!--Kit: ArkUI-->
-<!--Subsystem: Window-->
-<!--Owner: @fei_1007-->
-<!--Designer: @gcw_sPCsris4; @qinliwen0417-->
-<!--Tester: @qinliwen0417-->
-<!--Adviser: @ge-yafang-->
-
 窗口分为系统窗口、应用窗口两种类型。
 
 ## 系统窗口

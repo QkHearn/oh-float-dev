@@ -3,13 +3,6 @@
 > Skill 落盘。权威：https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-floatview  
 > 刷新：用户要求同步官网时 WebFetch 该 URL 覆盖本文；空壳则保持不动。指导页另见 [guide-float-view.md](../guides/guide-float-view.md)。
 
-<!--Kit: ArkUI-->
-<!--Subsystem: Window-->
-<!--Owner: @betafringe007-->
-<!--Designer: @loumou-->
-<!--Tester: @qinliwen0417-->
-<!--Adviser: @ge-yafang-->
-
 闪控窗是悬浮在桌面/应用界面上的小型窗口，提供灵活的窗口管理能力。
 
 本模块提供闪控窗能力，包括判断设备是否支持闪控窗功能、创建闪控窗控制器以启动、更新或停止闪控窗等。

@@ -1,6 +1,6 @@
 # 可抄骨架（本地）
 
-签名以 [reference/](../reference/README.md) 落盘为准。写程序只按下表**对应那一行**读齐，不要通读本目录，不要抄 `js-apis` 示例。
+签名以 [reference/](../reference/index.md) 落盘为准。写程序只按下表**对应那一行**读齐，不要通读本目录，不要抄 `js-apis` 示例。
 
 先保证页面能加载：`main_pages.json` 与加载 API 字符串一致。画中画枚举按 [pip.md](pip.md) 三列表改，不要只改 `tpl`。播放器落 `ets/model/AVPlayer.ets`。
 

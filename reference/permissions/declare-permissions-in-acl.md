@@ -2,13 +2,6 @@
 
 > Skill 落盘。权威：HarmonyOS 官网「申请受限权限」页。刷新时用官网现行正文覆盖。
 
-<!--Kit: Ability Kit-->
-<!--Subsystem: Security-->
-<!--Owner: @xia-bubai-->
-<!--Designer: @linshuqing; @hehehe-li-->
-<!--Tester: @leiyuqian-->
-<!--Adviser: @zengyawen-->
-
 <!--RP1-->
 受限权限通常不允许第三方应用申请。当应用需要访问必要资源时，如果发现某些权限的等级高于应用权限等级（APL），开发者可以通过ACL方式来解决等级不匹配的问题，从而使用受限权限。
 

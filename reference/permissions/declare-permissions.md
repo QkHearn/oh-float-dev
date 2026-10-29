@@ -2,13 +2,6 @@
 
 > Skill 落盘。权威：HarmonyOS 官网「声明权限」页。刷新时用官网现行正文覆盖。
 
-<!--Kit: Ability Kit-->
-<!--Subsystem: Security-->
-<!--Owner: @xia-bubai-->
-<!--Designer: @linshuqing; @hehehe-li-->
-<!--Tester: @leiyuqian-->
-<!--Adviser: @zengyawen-->
-
 应用在申请权限时，需在项目的配置文件中逐个声明所需权限，否则无法获取授权<!--RP2--><!--RP2End-->。
 
 ## 在配置文件中声明权限

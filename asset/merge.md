@@ -22,7 +22,7 @@ Ability 只 `loadContent('pages/Index')`。每种能力自己的页必须进 `ma
 
 只做一条就只登记那条用到的 `@Entry`。没登记的 `@Entry`：`router.pushUrl` / `setUIContext` / `loadContent` 都会失败。`Page1` 不是 `@Entry`，不要登记。
 
-不要三条同时 `start`（`1300034`）。本文件只讲登记/加载；骨架按 [README.md](README.md) 表读。叠加才读下一节。
+不要三条同时 `start`（`1300034`）。本文件只讲登记/加载；骨架按 [skeleton.md](skeleton.md) 表读。叠加才读下一节。
 
 ---
 

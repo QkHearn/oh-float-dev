@@ -2,13 +2,13 @@
 
 **以本目录接口落盘为日常契约。** 接口 / 查错 / 答接口时按下面「文档分类」打开对应文件，不要通读本目录，也不要把本仓 `docs/zh-cn` / DTS 当权威。官网现行正文只在用户要求刷新且抓到完整正文时覆盖本目录。
 
-**写程序不要用本 README 当骨架目录。** 骨架只走 [../asset/README.md](../asset/README.md)。
+**写程序不要用本索引当骨架目录。** 骨架只走 [../asset/skeleton.md](../asset/skeleton.md)。
 
 冲突：刷新成功的官网正文 > 本目录落盘 > `misuse/misuse-*.md`。
 
 ```text
 reference/
-├── README.md                      本索引
+├── index.md                       本索引
 ├── requirement-review.md          需求评审稿
 ├── apis/                          接口全文（只 Grep 节，禁止整文件 Read）
 │   ├── js-apis-pipWindow.md

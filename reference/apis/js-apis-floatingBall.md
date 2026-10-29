@@ -3,13 +3,6 @@
 > Skill 落盘。权威：https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-floatingball  
 > 刷新：用户要求同步官网时 WebFetch 该 URL 覆盖本文；空壳则保持不动。
 
-<!--Kit: ArkUI-->
-<!--Subsystem: Window-->
-<!--Owner: @betafringe007-->
-<!--Designer: @taoweihua-->
-<!--Tester: @qinliwen0417-->
-<!--Adviser: @ge-yafang-->
-
 该模块提供闪控球的基础功能，包括判断设备是否支持闪控球功能，以及创建闪控球控制器来启动、更新或停止闪控球。
 
 适用于跨应用的题目搜索、账单记录、商品比价、抢单、翻译场景，以及金融类应用的实时盯盘场景，以小窗模式呈现内容。闪控球以悬浮小组件形式显示在其他应用之上，即时呈现应用的关键信息。

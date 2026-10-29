@@ -12,7 +12,7 @@ description: >-
 
 只处理三类应用辅助窗口。用户提到子窗 / `TYPE_FLOAT` / 模态窗时：**明确说不在本 Skill 范围**，给一句分流理由后停手。
 
-签名、权限、错误码以 [reference/](reference/README.md) 落盘为准。日常不要 WebFetch。不要凭本文件直接写页面。有应用工程就改现有文件。骨架只读 [asset/](asset/README.md) 对应文件。`reference/misuse/misuse-*.md` 只放误用要点。指导缺口见 [reference/README](reference/README.md)「缺口」。
+签名、权限、错误码以 [reference/](reference/index.md) 落盘为准。日常不要 WebFetch。不要凭本文件直接写页面。有应用工程就改现有文件。骨架只读 [asset/](asset/skeleton.md) 对应文件。`reference/misuse/misuse-*.md` 只放误用要点。指导缺口见 [reference/index](reference/index.md)「缺口」。
 
 ## 目录
 
@@ -20,9 +20,9 @@ description: >-
 hmos-arkui-kit-window-floatwindow/
 ├── SKILL.md                      分流、模式、铁律（本文件）
 ├── asset/                        可抄骨架；写程序只走这里
-│   └── README.md
+│   └── skeleton.md
 └── reference/                    官网落盘与评审；按子目录打开，不要通读
-    ├── README.md                 七类索引
+    ├── index.md                  七类索引
     ├── requirement-review.md     需求评审稿
     ├── apis/                     js-apis 全文（只 Grep 节）
     ├── guides/                   开发指导摘要
@@ -58,7 +58,7 @@ hmos-arkui-kit-window-floatwindow/
 | **分流** | 本文件分流表。拿不准先问一句，不要 Read `reference/` |
 | **接口** | 先读对应 `reference/guides/guide-*.md`（球无 guide 则 [misuse-floating-ball.md](reference/misuse/misuse-floating-ball.md)）。`reference/apis/js-apis-*.md` **只 Grep 标题后 Read 该节**，禁止整文件 Read |
 | **查错** | 先读对应 `reference/misuse/misuse-*.md`。路径/权限再对 [stage-layout.md](reference/engineering/stage-layout.md)。错误码只 Grep `reference/permissions/errorcode-window-float.md` **对上的那一条**，禁止整文件 Read。**能定位到工作区文件就改掉** |
-| **写程序** | 只按 [asset/README.md](asset/README.md) **表里那一行**读齐，再对照 [stage-layout.md](reference/engineering/stage-layout.md) / [arkui-syntax.md](reference/engineering/arkui-syntax.md) / [ui-style.md](reference/engineering/ui-style.md)。禁止通读 `reference/apis/js-apis-*.md`；签名对不上才 Grep `reference/apis/` 该节 |
+| **写程序** | 只按 [asset/skeleton.md](asset/skeleton.md) **表里那一行**读齐，再对照 [stage-layout.md](reference/engineering/stage-layout.md) / [arkui-syntax.md](reference/engineering/arkui-syntax.md) / [ui-style.md](reference/engineering/ui-style.md)。禁止通读 `reference/apis/js-apis-*.md`；签名对不上才 Grep `reference/apis/` 该节 |
 | **需求设计** | [reference/requirement-review.md](reference/requirement-review.md)。写接口章时 Grep `reference/apis/js-apis` **对应节**，禁止整文件 Read |
 
 ### 1. 分流（必做）
@@ -128,7 +128,7 @@ hmos-arkui-kit-window-floatwindow/
 
 **先读骨架再改文件。** 不要抄 `reference/apis/js-apis-*.md` 示例当可粘贴代码。
 
-1. 只按 [asset/README.md](asset/README.md) 的表读齐。不要在本文件另开捷径；不要跳过 `pip.md` 直接抄 xcomponent；绑定不要再抄一份 `floating-ball.md` 整页 Index。
+1. 只按 [asset/skeleton.md](asset/skeleton.md) 的表读齐。不要在本文件另开捷径；不要跳过 `pip.md` 直接抄 xcomponent；绑定不要再抄一份 `floating-ball.md` 整页 Index。
 2. [reference/engineering/stage-layout.md](reference/engineering/stage-layout.md) 落点。有 `module.json5` + `main_pages.json`、用户给了路径、即使 `ets/pages` 为空也补文件。仅 OHOS 框架仓、没有应用模块才停手问路径。
 3. [reference/engineering/arkui-syntax.md](reference/engineering/arkui-syntax.md)「写出来必须能编过」+ [reference/engineering/ui-style.md](reference/engineering/ui-style.md)
 4. **自己编译**：命令见 [reference/engineering/stage-layout.md](reference/engineering/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `reference/apis/js-apis` **某一节**，禁止 Read 整个 `js-apis-*.md`

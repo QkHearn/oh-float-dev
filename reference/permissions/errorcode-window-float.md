@@ -3,13 +3,6 @@
 > Skill 落盘（悬浮相关 13000xx 摘录）。权威以官网窗口错误码页对应章节为准。  
 > 刷新：用户要求同步官网时用现行正文覆盖本文。
 
-<!--Kit: ArkUI-->
-<!--Subsystem: Window-->
-<!--Owner: @fei_1007-->
-<!--Designer: @gcw_sPCsris4-->
-<!--Tester: @qinliwen0417-->
-<!--Adviser: @ge-yafang-->
-
 > **说明：**
 >
 > 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../errorcode-universal.md)。
