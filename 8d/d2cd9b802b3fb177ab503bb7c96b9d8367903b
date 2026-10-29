@@ -1,0 +1,42 @@
+reference/engineering/arkui-syntax.md
+  s_d280b0efbbc15d::t_6350eebf4e61d7 57
+reference/index.md
+  s_d280b0efbbc15d::t_76762a52a48e7f 5
+  s_d280b0efbbc15d::t_fc7ec42f409002 11
+asset/merge.md
+  s_d280b0efbbc15d::t_100781d2d9bcec 25
+SKILL.md
+  s_d280b0efbbc15d::t_600f4eb1a80926 131
+  s_d280b0efbbc15d::t_9b2cb5edfdb8a9 23,25
+  s_d280b0efbbc15d::t_d7e840fb382be9 61
+  s_d280b0efbbc15d::t_343507a08b94c2 15
+asset/skeleton.md
+  s_d280b0efbbc15d::t_f21c032a818483 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.7",
+  "base_commit_sha": "8dd2cd9b802b3fb177ab503bb7c96b9d8367903b",
+  "prompts": {},
+  "humans": {
+    "h_5a953564e698df": {
+      "author": "Hearn <liuqiankun11@huawei.com>"
+    }
+  },
+  "sessions": {
+    "s_d280b0efbbc15d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8efcac04-e24e-46b2-b701-79ece0aa1c78",
+        "model": "grok-4.7"
+      },
+      "human_author": "Hearn <liuqiankun11@huawei.com>",
+      "custom_attributes": {
+        "stats_model_totals": "{\"grok-4.7\":{\"additions\":10,\"deletions\":59}}",
+        "stats_total_additions": "10",
+        "stats_total_deletions": "59",
+        "stats_turn_models": "{\"t_100781d2d9bcec\":\"grok-4.7\",\"t_343507a08b94c2\":\"grok-4.7\",\"t_519147b8a90911\":\"grok-4.7\",\"t_600f4eb1a80926\":\"grok-4.7\",\"t_6350eebf4e61d7\":\"grok-4.7\",\"t_76762a52a48e7f\":\"grok-4.7\",\"t_8cf8b95846b696\":\"grok-4.7\",\"t_93915d07fbb32b\":\"grok-4.7\",\"t_9b2cb5edfdb8a9\":\"grok-4.7\",\"t_b5bb31e9af88e0\":\"grok-4.7\",\"t_d7e840fb382be9\":\"grok-4.7\",\"t_e8f89f856de03c\":\"grok-4.7\",\"t_e987dc6a5f9391\":\"grok-4.7\",\"t_f21c032a818483\":\"grok-4.7\",\"t_fc7ec42f409002\":\"grok-4.7\",\"t_fe7c31642e7e88\":\"grok-4.7\"}"
+      }
+    }
+  }
+}
