@@ -35,12 +35,13 @@
   {
     "case_id": "FW-SMOKE-004",
     "layer": "smoke",
-    "title": "冒烟：闪控球分流",
-    "user_prompt": "做一个贴边小球，只显示标题和进度，不要自定义 UI。",
+    "title": "冒烟：闪控球分流（未说样式默认 EMPHATIC）",
+    "user_prompt": "做一个贴边小球，不要自定义 UI。未指定模板或样式。",
     "expected": {
       "primary_scene": "floating_ball",
       "template": "EMPHATIC",
-      "forbidden": ["new_ball_page", "setUIContext"]
+      "notes": "未说样式时默认 EMPHATIC；禁止因口语推断选 NORMAL/STATIC/SIMPLE",
+      "forbidden": ["NORMAL", "STATIC", "SIMPLE", "new_ball_page", "setUIContext"]
     }
   },
   {

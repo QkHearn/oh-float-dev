@@ -136,15 +136,20 @@ hmos-arkui-kit-window-floatwindow/
 4. **自己编译**：命令见 [reference/engineering/stage-layout.md](reference/engineering/stage-layout.md)；交卷带 `CompileArkTS` 通过（失败则改 ets 再编）。签名对不上才 Grep `reference/apis/js-apis` **某一节**，禁止 Read 整个 `js-apis-*.md`
 5. 表里有防窥才读 [asset/peep.md](asset/peep.md)，往已有页里加，不要另起一页
 
-**交卷前必检（写程序缺一不可）：**
+**交卷前必检（写程序）：**
 
 ```text
+有工程（module.json5 + hvigorw）时：
 - [ ] 语法规范：对照 arkui-syntax「写出来必须能编过」——try/catch+BusinessError；getWindowId 禁止 as number；PiP 只用 setAutoStartEnabled；XComponent 用 Options 形态；无 deprecated 顶层 router
 - [ ] 编译成功：自己跑 hvigorw assembleHap；输出含 CompileArkTS 通过。失败改 ets 再编。禁止让用户去 DevEco 代编
-- [ ] 无工程 / 无 hvigorw：写明停手原因，不要假装编过
+
+无工程 / 无 hvigorw 时（不要假装编过）：
+- [ ] 写明停手原因
+- [ ] 列出将改落点 + 同上语法必检清单（可附骨架要点）
+- [ ] 可以追问工程路径，但不能只有追问、没有分析
 ```
 
-评测用例见 [test-cases/](test-cases/README.md)（`FUNC-001` 专测这两项门禁）。
+评测用例见 [test-cases/](test-cases/README.md)（`FUNC-001~004` 按有/无工程分支判）。
 
 - ArkTS error / throw / deprecated / `as number` → 改刚写的 ets
 - 缺 `DeviceSecurityKit` DTS → 说明 SDK，不要改成文案防窥

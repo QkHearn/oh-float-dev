@@ -59,11 +59,12 @@
 
 #### 输入
 
-做一个贴边小球，只显示标题和进度，不要自定义 UI。
+做一个贴边小球，不要自定义 UI。未指定模板或样式。
 
 #### 预期
 
-- 命中：`floating_ball`（默认模板 `EMPHATIC`）
+- 命中：`floating_ball`
+- 模板：未说样式时默认 `EMPHATIC`（不要选 `NORMAL` / `STATIC` / `SIMPLE`）
 - 禁止：给球新建页面 / `setUIContext`
 
 ---

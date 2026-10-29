@@ -2,56 +2,101 @@
   {
     "case_id": "FW-FUNC-001",
     "layer": "scene-functional",
-    "title": "写程序交卷门禁：语法自检 + CompileArkTS",
+    "title": "写程序交卷门禁：画中画（有/无工程分支）",
     "mode": "write",
     "user_prompt": "在当前应用工程里实现视频播放画中画（默认 XComponent）。",
     "expected": {
       "primary_scene": "pip",
-      "gates": [
-        "syntax_self_check_against_arkui-syntax.md",
-        "no_as_number_on_getWindowId",
-        "setAutoStartEnabled_not_setAutoStart",
-        "self_run_hvigorw",
-        "CompileArkTS_pass_in_output"
-      ],
-      "forbidden": ["ask_user_to_compile_in_DevEco"]
+      "with_app_project": {
+        "gates": [
+          "edit_project_files",
+          "syntax_self_check_against_arkui-syntax.md",
+          "no_as_number_on_getWindowId",
+          "setAutoStartEnabled_not_setAutoStart",
+          "self_run_hvigorw",
+          "CompileArkTS_pass_in_output"
+        ],
+        "forbidden": ["ask_user_to_compile_in_DevEco"]
+      },
+      "without_app_project": {
+        "gates": [
+          "state_stop_reason_no_module_or_hvigorw",
+          "list_landing_paths_PipHost_Page1_AVPlayer_main_pages",
+          "list_syntax_checklist"
+        ],
+        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "exclude_from_compile_denominator": true
+      }
     }
   },
   {
     "case_id": "FW-FUNC-002",
     "layer": "scene-functional",
-    "title": "闪控窗写程序 + 编译门禁",
+    "title": "闪控窗写程序（有/无工程分支）",
     "mode": "write",
     "user_prompt": "实现闪控窗：Index 启动，内容页 FloatPanel。",
     "expected": {
       "primary_scene": "float_view",
-      "gates": ["syntax_self_check", "CompileArkTS_pass"],
-      "notes": "setUIContext 后 start，以 STARTED 为准"
+      "notes": "setUIContext 后 start，以 STARTED 为准；启动逻辑不进 FloatPanel",
+      "with_app_project": {
+        "gates": ["edit_project_files", "syntax_self_check", "CompileArkTS_pass"]
+      },
+      "without_app_project": {
+        "gates": [
+          "state_stop_reason_no_module_or_hvigorw",
+          "list_landing_paths_Index_FloatPanel_permissions",
+          "list_syntax_checklist"
+        ],
+        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "exclude_from_compile_denominator": true
+      }
     }
   },
   {
     "case_id": "FW-FUNC-003",
     "layer": "scene-functional",
-    "title": "闪控球写程序 + 编译门禁",
+    "title": "闪控球写程序（有/无工程分支）",
     "mode": "write",
     "user_prompt": "在 Index 上做闪控球，模板用强调样式。",
     "expected": {
       "primary_scene": "floating_ball",
       "template": "EMPHATIC",
-      "gates": ["syntax_self_check", "CompileArkTS_pass"],
-      "forbidden": ["new_ball_page"]
+      "forbidden": ["new_ball_page", "setUIContext"],
+      "with_app_project": {
+        "gates": ["edit_project_files", "syntax_self_check", "CompileArkTS_pass"]
+      },
+      "without_app_project": {
+        "gates": [
+          "state_stop_reason_no_module_or_hvigorw",
+          "list_landing_paths_Index_permissions",
+          "list_syntax_checklist"
+        ],
+        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "exclude_from_compile_denominator": true
+      }
     }
   },
   {
     "case_id": "FW-FUNC-004",
     "layer": "scene-functional",
-    "title": "绑定写程序 + 编译门禁",
+    "title": "绑定写程序（有/无工程分支）",
     "mode": "write",
     "user_prompt": "球窗绑定：点球开窗、点窗回球。",
     "expected": {
       "primary_scene": "bind",
-      "gates": ["syntax_self_check", "CompileArkTS_pass"],
-      "forbidden": ["duplicate_floating_ball_index"]
+      "forbidden": ["duplicate_floating_ball_index"],
+      "with_app_project": {
+        "gates": ["edit_project_files", "syntax_self_check", "CompileArkTS_pass"]
+      },
+      "without_app_project": {
+        "gates": [
+          "state_stop_reason_no_module_or_hvigorw",
+          "list_landing_paths_Index_FloatPanel_bind",
+          "list_syntax_checklist"
+        ],
+        "forbidden": ["fake_CompileArkTS_pass", "ask_path_only_without_analysis"],
+        "exclude_from_compile_denominator": true
+      }
     }
   },
   {
@@ -63,7 +108,8 @@
     "expected": {
       "must_cite_file_line": true,
       "fix": "wait_STARTED_callback",
-      "read_first": "reference/misuse/misuse-*.md"
+      "read_first": "reference/misuse/misuse-*.md",
+      "notes": "无文件可改时写出定位与改法即可"
     }
   },
   {
