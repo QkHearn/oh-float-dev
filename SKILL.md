@@ -6,6 +6,9 @@ description: >-
   Use when the user mentions 画中画、PiP、PiPWindow、闪控窗、floatView、闪控球、floatingBall、
   悬浮小窗、球窗绑定、防窥保护组合，或要为这三类写代码/查误用/写需求。
   不覆盖子窗口 createSubWindow、全局悬浮窗 TYPE_FLOAT、模态窗 TYPE_DIALOG。
+license: MIT
+metadata:
+  version: "1.0.0"
 ---
 
 # 悬浮类需求开发（画中画 / 闪控窗 / 闪控球）
