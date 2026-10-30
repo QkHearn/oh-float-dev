@@ -1,0 +1,14 @@
+SKILL.md
+  h_5a953564e698df 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "5.30.7",
+  "base_commit_sha": "dea3328cdad4afe80f0146b4da086761e21362a5",
+  "prompts": {},
+  "humans": {
+    "h_5a953564e698df": {
+      "author": "Hearn <liuqiankun11@huawei.com>"
+    }
+  }
+}
